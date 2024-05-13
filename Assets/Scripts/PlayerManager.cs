@@ -7,19 +7,18 @@ public class PlayerManager : MonoBehaviour
     Animator animator;
     Rigidbody2D rb;
     public float jumpPower = 10f;
-    int guradCount;
     bool isTouched = false;
     bool isStoped =false;
     [SerializeField] UIManager uiManager;
-    [SerializeField] CreateManager createManager;
 
     // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
-        guradCount = 0;
+        
     }
+   
 
 
     public void OneJumpAction()
@@ -35,9 +34,8 @@ public class PlayerManager : MonoBehaviour
         if (isTouched && !GameManager.instance.isMoved &&!isStoped)
         {
             GameManager.instance.isMoved = true;
-            createManager.Panelspawn();
             animator.SetTrigger("Jump");
-            //1マジャンプ　jumpPowerとgravityScaleで調節
+            //1マスジャンプ　jumpPowerとgravityScaleで調節
             jumpPower = 7.3f;
             rb.gravityScale = 3f;
             Jump();
@@ -61,10 +59,8 @@ public class PlayerManager : MonoBehaviour
         if (isTouched&&!GameManager.instance.isMoved2&&!isStoped)
         {
             GameManager.instance.isMoved2 = true;
-            createManager.Panelspawn();
-            createManager.Panelspawn2();
             animator.SetTrigger("Jump2");
-            //2回マスジャンプ　jumpPowerとgravityScaleで調節
+            //2マスジャンプ　jumpPowerとgravityScaleで調節
             jumpPower = 13f;
             rb.gravityScale = 2.7f;
             Jump();
@@ -79,6 +75,10 @@ public class PlayerManager : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col)
     {
+        if (GameManager.instance.isFinished)
+        {
+            return;
+        }
         if (col.CompareTag("JumpPanel"))
         {
             isTouched = true;
@@ -89,18 +89,7 @@ public class PlayerManager : MonoBehaviour
             uiManager.AddTimeCount();
             Destroy(col.gameObject);
         }
-        else if (col.CompareTag("Item2"))
-        {
-            guradCount++;
-            uiManager.GuradOn();
-            if(guradCount >= 1)
-            {
-                guradCount = 1;
-            }
-            
-            Destroy(col.gameObject);
-        }
-        else if (col.CompareTag("Trap") && guradCount == 0)
+        else if (col.CompareTag("Trap"))
         {
             isStoped = true;
             Destroy(col.gameObject.GetComponent<Collider2D>());
@@ -109,15 +98,22 @@ public class PlayerManager : MonoBehaviour
             Jump();
             StartCoroutine(WaitTimeAction());
         }
-        else if (col.CompareTag("Trap") && guradCount != 0)
+        else if (col.CompareTag("Stage_2"))
         {
-            Destroy(col.gameObject.GetComponent<Collider2D>());
-            guradCount = 0;
-            uiManager.GuradOff();
+            GameManager.instance.Stage2();
         }
-
-
-
+        else if (col.CompareTag("Stage_3"))
+        {
+            GameManager.instance.Stage3();
+        }
+        else if (col.CompareTag("Stage_4"))
+        {
+            GameManager.instance.Stage4();
+        }
+        else if (col.CompareTag("Stage_5"))
+        {
+            GameManager.instance.Stage5();
+        }
 
     }
 

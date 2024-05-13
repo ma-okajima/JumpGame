@@ -4,35 +4,31 @@ using UnityEngine;
 
 public class StopManager : MonoBehaviour
 {
-    int count = 0;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    [SerializeField] CreateManager createManager;
+
+    int count = 0;
+   
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.gameObject.tag=="JumpPanel")
+
+        if (GameManager.instance.isMoved == true)
         {
-            if (GameManager.instance.isMoved == true)
+            GameManager.instance.isMoved = false;
+            //GameManager.instance.CreateOnJumpPanel();
+            createManager.Panelspawn();
+        }
+        else if (GameManager.instance.isMoved2 == true)
+        {
+            count++;
+            if (count >= 2)
             {
-                GameManager.instance.isMoved = false;
-            }else if (GameManager.instance.isMoved2 == true)
-            {
-                count++;
-                if(count >= 2)
-                {
-                    GameManager.instance.isMoved2 = false;
-                    count = 0;
-                }
+                GameManager.instance.isMoved2 = false;
+                //GameManager.instance.CreateOnJumpPanel_2();
+                createManager.Panelspawn2();
+                count = 0;
+                createManager.Panelspawn();
             }
-            
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 public class BackGroundManager : MonoBehaviour
 {
+
     public float effectSpeed;
        
     float moveSpeed;

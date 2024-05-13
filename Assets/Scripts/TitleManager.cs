@@ -6,28 +6,32 @@ using UnityEngine.SceneManagement;
 
 public class TitleManager : MonoBehaviour
 {
-    [SerializeField] GameObject tapText;
-    float count = 0;
-    bool isActive = true;
-    private void Update()
-    {
-        TapFlash();
-    }
+    
+    [SerializeField] GameObject optionPanel;
+
+    
+   
 
     public void OnStartButton()
     {
         SceneManager.LoadScene("MainScene");
     }
-
-    void TapFlash()
+    public void OnCollectionButton()
     {
-        count += Time.deltaTime;
-        if(count > 0.7f)
-        {
-            isActive = !isActive;
-            tapText.SetActive(isActive);
-            count = 0;
-        }
-       
+        SceneManager.LoadScene("CollectionScene");
     }
+    public void OnOptionButton()
+    {
+        optionPanel.SetActive(true);
+    }
+    public void OptionBackButton()
+    {
+        optionPanel.SetActive(false);
+    }
+
+    public void ResetButton()
+    {
+        PlayerPrefs.DeleteKey("HISCORE");
+    }
+    
 }

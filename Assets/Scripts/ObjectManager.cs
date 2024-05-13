@@ -6,22 +6,36 @@ public class ObjectManager : MonoBehaviour
 {
    
     float moveSpeed;
-   
+    
 
     private void Start()
     {
         moveSpeed = GameManager.instance.MoveSpeed;
         
+        
     }
-
+    
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.CompareTag("JumpPanel"))
+        
+
+        if (col.gameObject.tag + "Trap(Clone)" == this.gameObject.name || col.gameObject.tag + "Item(Clone)" == this.gameObject.name)
         {
             transform.position = new Vector2(col.gameObject.transform.position.x, transform.position.y);
             transform.SetParent(col.transform);
+        }else if (col.gameObject.tag == "Player")
+        {
+            return;
         }
+        else
+        {
+            Destroy(gameObject);
+        }
+       
+        
     }
+
+    
 
     private void FixedUpdate()
     {

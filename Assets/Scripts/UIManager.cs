@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI pointText;
@@ -12,19 +13,30 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject guradCountObject;
     [SerializeField] GameObject timeupPanel;
     [SerializeField] GameObject resultPanel;
-    
+    [SerializeField] GameObject pausePanel;
+    [SerializeField] GameObject hiscoreChara;
+    [SerializeField] Button pauseButton;
+    [SerializeField] Color disableColor;
+    Color buttonColor;
+
+
     int scorePoint;
     int hiScore;
+    int stagePoint;
     float timeCount;
     public bool isStarted = false;
+
     private void Start()
     {
         scorePoint = 0;
-        timeCount = 100;
+        timeCount = 10;
         pointText.text = ("SCORE:" + scorePoint.ToString() + "m");
         timeText.text = ("Time:" + timeCount.ToString() + "sec");
         hiScore = PlayerPrefs.GetInt("HISCORE", 0);
         hiScoreText.text = ("HISCORE:"+hiScore.ToString() + "m");
+        buttonColor = pauseButton.GetComponent<Image>().color;
+        Time.timeScale = 1;
+
     }
 
     private void Update()
@@ -33,11 +45,31 @@ public class UIManager : MonoBehaviour
         {
             TimeStart();
         }
+        
+
     }
     public void AddPoint(int point)
     {
         scorePoint += point;
         pointText.text = ("SCORE:" + scorePoint.ToString() + "m");
+        if(scorePoint >= 12 && scorePoint<33)
+        {
+            GameManager.instance.stageType = GameManager.STAGETYPE.STAGE2;
+        }else if(scorePoint >= 33 &&scorePoint<54)
+        {
+            GameManager.instance.stageType = GameManager.STAGETYPE.STAGE3;
+        }
+        else if (scorePoint >= 54 && scorePoint < 75)
+        {
+            GameManager.instance.stageType = GameManager.STAGETYPE.STAGE4;
+        }
+        else if (scorePoint >= 75 && scorePoint < 96)
+        {
+            GameManager.instance.stageType = GameManager.STAGETYPE.STAGE5;
+        }
+
+        stagePoint += point;
+
     }
 
     void TimeStart()
@@ -60,6 +92,7 @@ public class UIManager : MonoBehaviour
             PlayerPrefs.SetInt("HISCORE", hiScore);
             hiScoreText.text = ("HISCORE:"+hiScore.ToString() + "m");
             PlayerPrefs.Save();
+            hiscoreChara.SetActive(true);
         }
         timeupPanel.SetActive(true);
         StartCoroutine(Result());
@@ -88,12 +121,32 @@ public class UIManager : MonoBehaviour
         yield return new WaitForSeconds(2f);
         addtimecountText.SetActive(false);
     }
-    public void GuradOn()
+    
+
+    public void PauseButton()
     {
-        guradCountObject.SetActive(true);
+        if (GameManager.instance.isFinished)
+        {
+            return;
+        }
+        pausePanel.SetActive(true);
+        pauseButton.interactable = false;
+        pauseButton.GetComponent<Image>().color = disableColor;
+        GameManager.instance.isPaused = !GameManager.instance.isPaused;
+        Time.timeScale = GameManager.instance.isPaused ? 0 : 1;
+        
     }
-    public void GuradOff()
+    public void PauseBackButton()
     {
-        guradCountObject.SetActive(false);
+        pausePanel.SetActive(false);
+        GameManager.instance.isPaused = !GameManager.instance.isPaused;
+        Time.timeScale = GameManager.instance.isPaused ? 0 : 1;
+        Invoke("EnablePauseButton", 5f);
+        
+    }
+    void EnablePauseButton()
+    {
+        pauseButton.interactable = true;
+        pauseButton.GetComponent<Image>().color = buttonColor;
     }
 }
