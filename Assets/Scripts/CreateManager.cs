@@ -84,7 +84,7 @@ public class CreateManager : MonoBehaviour
     void CreateObject(Vector2 spawnPoint)
     {
 
-        if (itemCount >= 3)
+        if (itemCount >= 22)
         {
             isItemed = false;
             itemCount = 0;

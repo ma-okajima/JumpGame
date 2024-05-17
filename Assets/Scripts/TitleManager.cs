@@ -31,7 +31,8 @@ public class TitleManager : MonoBehaviour
 
     public void ResetButton()
     {
-        PlayerPrefs.DeleteKey("HISCORE");
+        //PlayerPrefs.DeleteKey("HISCORE");
+        PlayerPrefs.DeleteAll();
     }
     
 }

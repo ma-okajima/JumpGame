@@ -9,6 +9,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI timeText;
     [SerializeField] TextMeshProUGUI resultScore;
     [SerializeField] TextMeshProUGUI hiScoreText;
+    [SerializeField] TextMeshProUGUI getcollectionText;
+    [SerializeField] GameObject getcollectionBox;
     [SerializeField] GameObject addtimecountText;
     [SerializeField] GameObject guradCountObject;
     [SerializeField] GameObject timeupPanel;
@@ -93,6 +95,7 @@ public class UIManager : MonoBehaviour
             hiScoreText.text = ("HISCORE:"+hiScore.ToString() + "m");
             PlayerPrefs.Save();
             hiscoreChara.SetActive(true);
+            
         }
         timeupPanel.SetActive(true);
         StartCoroutine(Result());
@@ -149,4 +152,17 @@ public class UIManager : MonoBehaviour
         pauseButton.interactable = true;
         pauseButton.GetComponent<Image>().color = buttonColor;
     }
+    public void GetCollection(string getcollectionName)
+    {
+        getcollectionText.text = (getcollectionName + "GET!!");
+        //仮で追加
+        getcollectionBox.SetActive(true);
+        //StartCoroutine(OnGetCollection());
+    }
+    //IEnumerator OnGetCollection()
+    //{
+    //    getcollectionBox.SetActive(true);
+    //    yield return new WaitForSeconds(2f);
+    //    getcollectionBox.SetActive(false);
+    //}
 }

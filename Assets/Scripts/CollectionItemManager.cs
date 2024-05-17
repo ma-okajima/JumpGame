@@ -7,21 +7,25 @@ public class CollectionItemManager : MonoBehaviour
 {
     [SerializeField] CollectionSO collectionSO;
     [SerializeField] CollectionManager collectionManager;
-    [SerializeField] GameObject coverImage;
-  
+    [SerializeField] GameObject coverimageBox;
+    [SerializeField] Image itemImage;
+    [SerializeField] Image coverImage;
 
     private void Start()
     {
         
-        int key = PlayerPrefs.GetInt(collectionSO.name, 0);
+        int key = PlayerPrefs.GetInt(collectionSO.Name, 0);
+        itemImage.sprite = collectionSO.Sprite;
+        coverImage.sprite = collectionSO.Sprite;
         if(key == 0)
         {
             collectionSO.Condition = false;
-            coverImage.SetActive(true);
+            coverimageBox.SetActive(true);
         }else if (key == 1)
         {
             collectionSO.Condition = true;
-            coverImage.SetActive(false);
+            coverimageBox.SetActive(false);
+            
         }
 
     }

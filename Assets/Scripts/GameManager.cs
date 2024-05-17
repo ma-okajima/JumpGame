@@ -8,13 +8,14 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     [SerializeField] StageManager stageManager;
     [SerializeField] CreateManager createManager;
+    [SerializeField] UIManager uiManager;
     public bool isJgCreared = false;
     //BG、パネル、オブジェクトをtrueの時動かす
     public bool isMoved = false;
     public bool isMoved2 = false;
     public bool isFinished = false;
     public bool isPaused = false;
-    float moveSpeed = 6f;
+    float moveSpeed = 15f;
     int stageNum = 1;
 
     public float MoveSpeed { get => moveSpeed; }
@@ -34,9 +35,28 @@ public class GameManager : MonoBehaviour
     public CollectionSO[] collections;
 
 
+    
+    private void Awake()
+    {
+        if(instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    private void Start()
+    {
+        isPaused = false;
+        
+    }
+
     private void Update()
     {
-        
+
         switch (stageType)
         {
             case STAGETYPE.STAGE1:
@@ -57,23 +77,7 @@ public class GameManager : MonoBehaviour
 
         }
     }
-    private void Awake()
-    {
-        if(instance == null)
-        {
-            instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
 
-    private void Start()
-    {
-        isPaused = false;
-        
-    }
     public void RestartScene()
     {
         Scene thisScene = SceneManager.GetActiveScene();
@@ -83,14 +87,20 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene("TitleScene");
     }
+    public void CollectionScene()
+    {
+        SceneManager.LoadScene("CollectionScene");
+    }
+
     public void Stage2()
     {
         stageManager.backgroundType = StageManager.BACKGROUNDTYPE.BG_2;
-        Collection_1();
+        GetCollection(1);
     }
     public void Stage3()
     {
         stageManager.backgroundType = StageManager.BACKGROUNDTYPE.BG_3;
+        GetCollection(2);
     }
     public void Stage4()
     {
@@ -101,20 +111,30 @@ public class GameManager : MonoBehaviour
         stageManager.backgroundType = StageManager.BACKGROUNDTYPE.BG_5;
     }
 
-    //public void CreateOnJumpPanel()
-    //{
-    //    createManager.Panelspawn();
-    //}
-    //public void CreateOnJumpPanel_2()
-    //{
-    //    createManager.Panelspawn();
-    //    createManager.Panelspawn2();
-    //}
+    
 
-    void Collection_1()
+    void GetCollection(int getNum)
     {
-        PlayerPrefs.SetInt("Trophy", 1);
-        PlayerPrefs.Save();
+        foreach(var collection in collections)
+        {
+            if (collection.Num == getNum)
+            {
+                int keyNum = PlayerPrefs.GetInt(collection.Name, 0);
+                if(keyNum == 1)
+                {
+                    return;
+                }
+                else if(keyNum == 0)
+                {
+                    PlayerPrefs.SetInt(collection.Name, 1);
+                    PlayerPrefs.Save();
+                    uiManager.GetCollection(collection.Name);
+                }
+
+            }
+        }
+       
+        
     }
 
     

@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f39ccff72d8184423991050cd163efd4, type: 3}
-  m_Name: Trophy
+  m_Name: Collection_10
   m_EditorClassIdentifier: 
-  name: 1stTrophy
-  keyword: 20mGoal
-  condition: 1
-  sprite: {fileID: 21300000, guid: 759f7788ab2d45442a085ea6cf0a8d79, type: 3}
-  text: thithithithitahithi
-  num: 0
+  name: 10
+  keyword: OpenKey NoCollision
+  condition: 0
+  sprite: {fileID: 21300000, guid: a730a75e325287748a0babfcac0941ac, type: 3}
+  text: toritoritori
+  num: 10

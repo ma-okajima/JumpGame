@@ -9,6 +9,7 @@ public class CollectionSO : ScriptableObject
     [SerializeField] string keyword;
     [SerializeField] bool condition;
     [SerializeField] Sprite sprite;
+    [SerializeField] Sprite coversprite;
     [TextArea]
     [SerializeField] string text;
     [SerializeField] int num;
@@ -19,5 +20,6 @@ public class CollectionSO : ScriptableObject
     public Sprite Sprite { get => sprite; }
     public string Text { get => text; }
     public int Num { get => num;  }
+    public Sprite Coversprite { get => coversprite;}
 }
 

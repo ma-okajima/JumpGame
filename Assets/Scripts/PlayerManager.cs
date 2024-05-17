@@ -18,7 +18,18 @@ public class PlayerManager : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         
     }
-   
+
+    private void Update()
+    {
+        //キーボード入力
+        if(Input.GetKeyDown(KeyCode.F))
+        {
+            OneJumpAction();
+        }else if (Input.GetKeyDown(KeyCode.J))
+        {
+            TwoJumpAction();
+        }
+    }
 
 
     public void OneJumpAction()
@@ -36,8 +47,8 @@ public class PlayerManager : MonoBehaviour
             GameManager.instance.isMoved = true;
             animator.SetTrigger("Jump");
             //1マスジャンプ　jumpPowerとgravityScaleで調節
-            jumpPower = 7.3f;
-            rb.gravityScale = 3f;
+            jumpPower = 12f;
+            rb.gravityScale = 12f;
             Jump();
             uiManager.AddPoint(1);
 
@@ -61,8 +72,8 @@ public class PlayerManager : MonoBehaviour
             GameManager.instance.isMoved2 = true;
             animator.SetTrigger("Jump2");
             //2マスジャンプ　jumpPowerとgravityScaleで調節
-            jumpPower = 13f;
-            rb.gravityScale = 2.7f;
+            jumpPower = 22f;
+            rb.gravityScale = 11f;
             Jump();
             uiManager.AddPoint(2);
         }
@@ -100,7 +111,7 @@ public class PlayerManager : MonoBehaviour
         }
         else if (col.CompareTag("Stage_2"))
         {
-            GameManager.instance.Stage2();
+            GameManager.instance.Stage2();      
         }
         else if (col.CompareTag("Stage_3"))
         {
@@ -128,8 +139,11 @@ public class PlayerManager : MonoBehaviour
 
     IEnumerator WaitTimeAction()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
         isStoped = false;
     }
+
+    
+
     
 }
