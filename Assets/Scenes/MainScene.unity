@@ -1963,7 +1963,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 200, y: 50}
+  m_SizeDelta: {x: 348.9, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &714068544
 CanvasRenderer:
@@ -3801,8 +3801,8 @@ MonoBehaviour:
   timeText: {fileID: 1550460527}
   resultScore: {fileID: 2081789177}
   hiScoreText: {fileID: 668486756}
-  getcollectionText: {fileID: 1196774234}
-  getcollectionBox: {fileID: 1318050173}
+  getcollectionText: {fileID: 714068545}
+  getcollectionBox: {fileID: 1261961654}
   addtimecountText: {fileID: 2051849980}
   guradCountObject: {fileID: 1262756807}
   timeupPanel: {fileID: 15577521}

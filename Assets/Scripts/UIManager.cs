@@ -154,15 +154,15 @@ public class UIManager : MonoBehaviour
     }
     public void GetCollection(string getcollectionName)
     {
-        getcollectionText.text = (getcollectionName + "GET!!");
+        getcollectionText.text = (getcollectionName + "GET");
         //仮で追加
-        getcollectionBox.SetActive(true);
-        //StartCoroutine(OnGetCollection());
+        //getcollectionBox.SetActive(true);
+        StartCoroutine(OnGetCollection());
     }
-    //IEnumerator OnGetCollection()
-    //{
-    //    getcollectionBox.SetActive(true);
-    //    yield return new WaitForSeconds(2f);
-    //    getcollectionBox.SetActive(false);
-    //}
+    IEnumerator OnGetCollection()
+    {
+        getcollectionBox.SetActive(true);
+        yield return new WaitForSeconds(2f);
+        getcollectionBox.SetActive(false);
+    }
 }
