@@ -7,11 +7,16 @@ public class PlayerManager : MonoBehaviour
     Animator animator;
     Rigidbody2D rb;
     public float jumpPower = 10f;
-    bool isTouched = false;
+
+    //Trap接触時の待機時間管理の為のbool値
     bool isStoped =false;
+
+    //Trap接触時の待機時間
+    [SerializeField] float waitCount;
+
     [SerializeField] UIManager uiManager;
 
-    // Start is called before the first frame update
+    
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -42,7 +47,7 @@ public class PlayerManager : MonoBehaviour
         }
         //カウントダウン開始
         uiManager.isStarted = true;
-        if (isTouched && !GameManager.instance.isMoved &&!isStoped)
+        if (GameManager.instance.isTouched && !GameManager.instance.isMoved &&!isStoped)
         {
             GameManager.instance.isMoved = true;
             animator.SetTrigger("Jump");
@@ -67,7 +72,7 @@ public class PlayerManager : MonoBehaviour
         //カウントダウン開始　
         uiManager.isStarted = true;
         
-        if (isTouched&&!GameManager.instance.isMoved2&&!isStoped)
+        if (GameManager.instance.isTouched&&!GameManager.instance.isMoved2&&!isStoped)
         {
             GameManager.instance.isMoved2 = true;
             animator.SetTrigger("Jump2");
@@ -90,12 +95,8 @@ public class PlayerManager : MonoBehaviour
         {
             return;
         }
-        if (col.CompareTag("JumpPanel"))
-        {
-            isTouched = true;
-           
-        }
-        else if (col.CompareTag("Item1"))
+        
+        if (col.CompareTag("Item1"))
         {
             uiManager.AddTimeCount();
             Destroy(col.gameObject);
@@ -127,19 +128,19 @@ public class PlayerManager : MonoBehaviour
         }
 
     }
-
+    //ジャンプ中キー入力(ボタン入力不可）
     private void OnTriggerExit2D(Collider2D col)
     {
         if (col.CompareTag("JumpPanel"))
         {
-            isTouched = false;
+            GameManager.instance.isTouched = false;
         }
         
     }
-
+    //Trap接触時の待機時間
     IEnumerator WaitTimeAction()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(waitCount);
         isStoped = false;
     }
 

@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     public bool isMoved2 = false;
     public bool isFinished = false;
     public bool isPaused = false;
+    public bool isTouched ;
     float moveSpeed = 15f;
     int stageNum = 1;
 
@@ -51,6 +52,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         isPaused = false;
+        isTouched = true;
         
     }
 

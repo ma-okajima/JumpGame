@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.Events;
 public class CreateManager : MonoBehaviour
 {
     [SerializeField] GameObject jumpPanel;
@@ -12,8 +12,8 @@ public class CreateManager : MonoBehaviour
     [SerializeField] List<GameObject> createPrefabs_4 = new List<GameObject> { };
     [SerializeField] List<GameObject> createPrefabs_5 = new List<GameObject> { };
     Vector2 spawnPointJG = new Vector2(42, 0);
-    Vector2 spawnPointTrap = new Vector2(15, -0.5f);
-    Vector2 spawnPointTrap2 = new Vector2(18, -0.5f);
+    Vector2 spawnPointTrap = new Vector2(15, -0.5f); 
+    Vector2 spawnPointTrap2 = new Vector2(18,-0.5f);
 
     int createNum;
     int itemCount = 0;
@@ -22,6 +22,8 @@ public class CreateManager : MonoBehaviour
     public bool isTraped = false;
     bool isItemed = false;
     List<GameObject> createPrefabs;
+
+    
 
     private void Start()
     {
@@ -70,9 +72,9 @@ public class CreateManager : MonoBehaviour
         CreateObject(spawnPointTrap2);
      
     }
-    public void Panelspawn2()
+    public void Panelspawn2(UnityAction nextJump)
     {
-        CreateObject(spawnPointTrap);
+        CreateObject(spawnPointTrap,nextJump);
       
     }
  
@@ -81,7 +83,7 @@ public class CreateManager : MonoBehaviour
         GameObject newPanel = Instantiate(jumpPrefabs[stageNum], spawnPointJG, Quaternion.identity);
     }
 
-    void CreateObject(Vector2 spawnPoint)
+    void CreateObject(Vector2 spawnPoint,UnityAction nextJump=null)
     {
 
         if (itemCount >= 22)
@@ -148,8 +150,9 @@ public class CreateManager : MonoBehaviour
         }
         if (createNum <= 2 || createNum >= 8)
         {
-            GameObject newOb = Instantiate(createPrefabs[createNum], spawnPoint, transform.rotation);
+            GameObject newOb = Instantiate(createPrefabs[createNum], spawnPoint, transform.rotation);//createPrefabs[createNum].transform.rotation);
 
         }
+        nextJump?.Invoke();
     }
 }

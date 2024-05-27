@@ -8,15 +8,15 @@ public class StopManager : MonoBehaviour
     [SerializeField] CreateManager createManager;
 
     int count = 0;
-   
+
     private void OnTriggerEnter2D(Collider2D col)
     {
 
         if (GameManager.instance.isMoved == true)
         {
             GameManager.instance.isMoved = false;
-            //GameManager.instance.CreateOnJumpPanel();
-            createManager.Panelspawn();
+            StartCoroutine(OneJumpAction());
+
         }
         else if (GameManager.instance.isMoved2 == true)
         {
@@ -24,11 +24,20 @@ public class StopManager : MonoBehaviour
             if (count >= 2)
             {
                 GameManager.instance.isMoved2 = false;
-                //GameManager.instance.CreateOnJumpPanel_2();
-                createManager.Panelspawn2();
                 count = 0;
-                createManager.Panelspawn();
+                createManager.Panelspawn2(NextJump);
             }
         }
     }
+    IEnumerator OneJumpAction()
+    {
+        createManager.Panelspawn();
+        yield return new WaitUntil(() => GameManager.instance.isTouched = true);
+    }
+    
+    void NextJump()
+    {
+        StartCoroutine(OneJumpAction());
+    }
 }
+

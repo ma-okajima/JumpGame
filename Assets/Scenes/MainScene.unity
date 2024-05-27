@@ -1243,6 +1243,7 @@ MonoBehaviour:
   isMoved2: 0
   isFinished: 0
   isPaused: 0
+  isTouched: 0
   stageType: 0
   collections:
   - {fileID: 11400000, guid: 4d94213e6fdf945ab954475c9d4cdd42, type: 2}
@@ -2113,6 +2114,10 @@ PrefabInstance:
     - target: {fileID: 8701545224919753814, guid: 06d03a43344ee4908be23c3ba723cfc9, type: 3}
       propertyPath: m_Name
       value: JumpGround 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8701545224919753814, guid: 06d03a43344ee4908be23c3ba723cfc9, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3093,6 +3098,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpPower: 10
+  waitCount: 1
   uiManager: {fileID: 1396265148}
 --- !u!1 &1108814022
 GameObject:
@@ -3623,6 +3629,10 @@ PrefabInstance:
     - target: {fileID: 8701545224919753814, guid: 06d03a43344ee4908be23c3ba723cfc9, type: 3}
       propertyPath: m_Name
       value: JumpGround (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8701545224919753814, guid: 06d03a43344ee4908be23c3ba723cfc9, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5609,6 +5619,10 @@ PrefabInstance:
     - target: {fileID: 8701545224919753814, guid: 06d03a43344ee4908be23c3ba723cfc9, type: 3}
       propertyPath: m_Name
       value: JumpGround
+      objectReference: {fileID: 0}
+    - target: {fileID: 8701545224919753814, guid: 06d03a43344ee4908be23c3ba723cfc9, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5847105273122978491, guid: 06d03a43344ee4908be23c3ba723cfc9, type: 3}
