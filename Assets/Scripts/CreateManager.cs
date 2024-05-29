@@ -4,68 +4,29 @@ using UnityEngine;
 using UnityEngine.Events;
 public class CreateManager : MonoBehaviour
 {
-    [SerializeField] GameObject jumpPanel;
-    [SerializeField] List<GameObject> jumpPrefabs = new List<GameObject> { };
+    
     [SerializeField] List<GameObject> createPrefabs_1 = new List<GameObject> { };
     [SerializeField] List<GameObject> createPrefabs_2 = new List<GameObject> { };
     [SerializeField] List<GameObject> createPrefabs_3 = new List<GameObject> { };
     [SerializeField] List<GameObject> createPrefabs_4 = new List<GameObject> { };
     [SerializeField] List<GameObject> createPrefabs_5 = new List<GameObject> { };
-    Vector2 spawnPointJG = new Vector2(42, 0);
+    
     Vector2 spawnPointTrap = new Vector2(15, -0.5f); 
     Vector2 spawnPointTrap2 = new Vector2(18,-0.5f);
 
     int createNum;
     int itemCount = 0;
-    int jumpCount = 0;
-    int stageNum = 0;
+    
+    
+    //アイテム出現後次出現まで空ける値
+    [SerializeField] int itemWaitCount;
     public bool isTraped = false;
     bool isItemed = false;
     List<GameObject> createPrefabs;
 
     
 
-    private void Start()
-    {
-        jumpCount = 2;
-
-
-    }
-    private void Update()
-    {
-     
-        if (GameManager.instance.isJgCreared == true)
-        {
-            jumpCount++;
-            if (jumpCount > 2)
-            {
-                stageNum++;
-                jumpCount = 0;
-            }
-            JGSpawn();
-            GameManager.instance.isJgCreared = false;
-        }
-        if (GameManager.instance.stageType == GameManager.STAGETYPE.STAGE1)
-        {
-            createPrefabs = createPrefabs_1;
-        }else if(GameManager.instance.stageType == GameManager.STAGETYPE.STAGE2)
-        {
-            createPrefabs = createPrefabs_2;
-        }
-        else if (GameManager.instance.stageType == GameManager.STAGETYPE.STAGE3)
-        {
-            createPrefabs = createPrefabs_3;
-        }
-        else if (GameManager.instance.stageType == GameManager.STAGETYPE.STAGE4)
-        {
-            createPrefabs = createPrefabs_4;
-        }
-        else if (GameManager.instance.stageType == GameManager.STAGETYPE.STAGE5)
-        {
-            createPrefabs = createPrefabs_5;
-        }
-    }
-
+   
     //createNum:[0~2 Trap] [8~9 Item]
     public void Panelspawn()
     {
@@ -78,15 +39,12 @@ public class CreateManager : MonoBehaviour
       
     }
  
-    public void JGSpawn()
-    {
-        GameObject newPanel = Instantiate(jumpPrefabs[stageNum], spawnPointJG, Quaternion.identity);
-    }
+   
 
     void CreateObject(Vector2 spawnPoint,UnityAction nextJump=null)
     {
 
-        if (itemCount >= 22)
+        if (itemCount >= itemWaitCount)
         {
             isItemed = false;
             itemCount = 0;
@@ -154,5 +112,31 @@ public class CreateManager : MonoBehaviour
 
         }
         nextJump?.Invoke();
+    }
+    public void OnDetectObject(Collider2D col)
+    {
+        
+        string tagName = col.gameObject.tag;
+        Debug.Log(col.gameObject.tag);
+        if(tagName == "Stage_1")
+        {
+            createPrefabs = createPrefabs_1;
+        }
+        else if (tagName == "Stage_2")
+        {
+            createPrefabs = createPrefabs_2;
+        }
+        else if (tagName == "Stage_3")
+        {
+            createPrefabs = createPrefabs_3;
+        }
+        else if (tagName == "Stage_4")
+        {
+            createPrefabs = createPrefabs_4;
+        }
+        else if (tagName == "Stage_5")
+        {
+            createPrefabs = createPrefabs_5;
+        }
     }
 }

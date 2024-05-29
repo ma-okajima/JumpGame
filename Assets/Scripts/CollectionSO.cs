@@ -6,20 +6,26 @@ using UnityEngine;
 public class CollectionSO : ScriptableObject
 {
     [SerializeField] new string name;
+    [SerializeField] Sprite nameSprite;
     [SerializeField] string keyword;
+    [SerializeField] Sprite keywordSprite;
     [SerializeField] bool condition;
-    [SerializeField] Sprite sprite;
-    [SerializeField] Sprite coversprite;
-    [TextArea]
-    [SerializeField] string text;
+    [SerializeField] Sprite itemSprite;
+    [SerializeField] Sprite coverSprite;
+    
+    [SerializeField] Sprite textSprite;
+
     [SerializeField] int num;
 
     public string Name { get => name;}
     public string Keyword { get => keyword;}
     public bool Condition { get => condition; set => condition = value; }
-    public Sprite Sprite { get => sprite; }
-    public string Text { get => text; }
+    public Sprite Sprite { get => itemSprite; }
+    
     public int Num { get => num;  }
-    public Sprite Coversprite { get => coversprite;}
+    public Sprite Coversprite { get => coverSprite;}
+    public Sprite NameSprite { get => nameSprite;}
+    public Sprite KeywordSprite { get => keywordSprite;}
+    public Sprite TextSprite { get => textSprite;}
 }
 

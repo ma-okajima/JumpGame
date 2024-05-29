@@ -8,15 +8,15 @@ using UnityEngine.UI;
 public class CollectionManager : MonoBehaviour
 {
     
-    [SerializeField] TextMeshProUGUI collectionName;
-    [SerializeField] TextMeshProUGUI descriptionText;
-    [SerializeField] Image defaultSprite;
-    Sprite coverSprite;
-    string coverName;
+    [SerializeField] Image collectionNameImage;
+    [SerializeField] Image descriptionImage;
+    [SerializeField] Image defaultImage;
+    [SerializeField] Image coverImage;
+    [SerializeField] Image coverNameImage;
     private void Start()
     {
-        coverName = collectionName.text;
-        coverSprite = defaultSprite.sprite;
+        coverNameImage = collectionNameImage;
+        coverImage = defaultImage;
     }
 
     public void TitleButton()
@@ -28,14 +28,14 @@ public class CollectionManager : MonoBehaviour
     {
         if (collectionSO.Condition == true)
         {
-            defaultSprite.sprite = collectionSO.Sprite;
-            collectionName.text = collectionSO.Name;
-            descriptionText.text = collectionSO.Text;
+            defaultImage.sprite = collectionSO.Sprite;
+            collectionNameImage.sprite= collectionSO.NameSprite;
+            descriptionImage.sprite= collectionSO.TextSprite;
         }else if (collectionSO.Condition == false)
         {
-            defaultSprite.sprite = coverSprite;
-            collectionName.text = coverName;
-            descriptionText.text = collectionSO.Keyword;
+            defaultImage= coverImage;
+            collectionNameImage= coverNameImage;
+            descriptionImage.sprite= collectionSO.KeywordSprite;
         }
 
         

@@ -6,8 +6,20 @@ public class PlayerManager : MonoBehaviour
 {
     Animator animator;
     Rigidbody2D rb;
-    public float jumpPower = 10f;
-
+    //デフォルト
+    [SerializeField]float jumpPower = 10f;
+    //OneJump時のJumpPower
+    [SerializeField] float oneJumpPower;
+    //TwoJump時のJumpPower
+    [SerializeField] float twoJumpPower;
+    //OneJump時のグラビティPower
+    [SerializeField] float oneJumpGravity;
+    //TwoJump時のグラビティPower
+    [SerializeField] float twoJumpGravity;
+    //Trap接触時のJumpPower
+    [SerializeField] float hurtJumpPower;
+    //TwoJump時の高さ上限値
+    [SerializeField] float maxYPos;
     //Trap接触時の待機時間管理の為のbool値
     bool isStoped =false;
 
@@ -34,6 +46,14 @@ public class PlayerManager : MonoBehaviour
         {
             TwoJumpAction();
         }
+        //TwoJump時の高さ上限
+        if (GameManager.instance.isMoved2)
+        {
+            if (transform.position.y >= maxYPos)
+            {
+                transform.position = new Vector2(transform.position.x, maxYPos);
+            }
+        }
     }
 
 
@@ -50,10 +70,11 @@ public class PlayerManager : MonoBehaviour
         if (GameManager.instance.isTouched && !GameManager.instance.isMoved &&!isStoped)
         {
             GameManager.instance.isMoved = true;
+            GameManager.instance.isTouched = false;
             animator.SetTrigger("Jump");
             //1マスジャンプ　jumpPowerとgravityScaleで調節
-            jumpPower = 12f;
-            rb.gravityScale = 12f;
+            jumpPower = oneJumpPower;
+            rb.gravityScale = oneJumpGravity;
             Jump();
             uiManager.AddPoint(1);
 
@@ -75,10 +96,11 @@ public class PlayerManager : MonoBehaviour
         if (GameManager.instance.isTouched&&!GameManager.instance.isMoved2&&!isStoped)
         {
             GameManager.instance.isMoved2 = true;
+            GameManager.instance.isTouched = false;
             animator.SetTrigger("Jump2");
             //2マスジャンプ　jumpPowerとgravityScaleで調節
-            jumpPower = 22f;
-            rb.gravityScale = 11f;
+            jumpPower = twoJumpPower;
+            rb.gravityScale = twoJumpGravity;
             Jump();
             uiManager.AddPoint(2);
         }
@@ -87,6 +109,13 @@ public class PlayerManager : MonoBehaviour
     void Jump()
     {
         rb.velocity = Vector2.up * jumpPower;
+    }
+
+    //Trap接触時の待機時間
+    IEnumerator WaitTimeAction()
+    {
+        yield return new WaitForSeconds(waitCount);
+        isStoped = false;
     }
 
     private void OnTriggerEnter2D(Collider2D col)
@@ -106,7 +135,7 @@ public class PlayerManager : MonoBehaviour
             isStoped = true;
             Destroy(col.gameObject.GetComponent<Collider2D>());
             animator.SetTrigger("Hurt");
-            jumpPower = 5;
+            jumpPower = hurtJumpPower;
             Jump();
             StartCoroutine(WaitTimeAction());
         }
@@ -128,23 +157,5 @@ public class PlayerManager : MonoBehaviour
         }
 
     }
-    //ジャンプ中キー入力(ボタン入力不可）
-    private void OnTriggerExit2D(Collider2D col)
-    {
-        if (col.CompareTag("JumpPanel"))
-        {
-            GameManager.instance.isTouched = false;
-        }
-        
-    }
-    //Trap接触時の待機時間
-    IEnumerator WaitTimeAction()
-    {
-        yield return new WaitForSeconds(waitCount);
-        isStoped = false;
-    }
-
-    
-
-    
+ 
 }

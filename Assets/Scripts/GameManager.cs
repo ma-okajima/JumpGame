@@ -16,21 +16,12 @@ public class GameManager : MonoBehaviour
     public bool isFinished = false;
     public bool isPaused = false;
     public bool isTouched ;
-    float moveSpeed = 15f;
-    int stageNum = 1;
+
+    //全体のスクロールスピード
+    [SerializeField]float moveSpeed = 15f;
+    
 
     public float MoveSpeed { get => moveSpeed; }
-
-    public enum STAGETYPE
-    {
-        STAGE1,
-        STAGE2,
-        STAGE3,
-        STAGE4,
-        STAGE5,
-    }
-
-    public STAGETYPE stageType = STAGETYPE.STAGE1;
 
 
     public CollectionSO[] collections;
@@ -56,30 +47,7 @@ public class GameManager : MonoBehaviour
         
     }
 
-    private void Update()
-    {
-
-        switch (stageType)
-        {
-            case STAGETYPE.STAGE1:
-                stageNum = 1;
-                break;
-            case STAGETYPE.STAGE2:
-                stageNum = 2;
-                break;
-            case STAGETYPE.STAGE3:
-                stageNum = 3;
-                break;
-            case STAGETYPE.STAGE4:
-                stageNum = 4;
-                break;
-            case STAGETYPE.STAGE5:
-                stageNum = 5;
-                break;
-
-        }
-    }
-
+  
     public void RestartScene()
     {
         Scene thisScene = SceneManager.GetActiveScene();
@@ -112,6 +80,7 @@ public class GameManager : MonoBehaviour
     {
         stageManager.backgroundType = StageManager.BACKGROUNDTYPE.BG_5;
     }
+    
 
     
 

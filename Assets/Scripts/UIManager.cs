@@ -24,16 +24,22 @@ public class UIManager : MonoBehaviour
 
     int scorePoint;
     int hiScore;
-    int stagePoint;
-    float timeCount;
+    //ゲーム開始時の所持時間
+    [SerializeField]float startTime;
+
+    //アイテム取得時の追加時間
+    [SerializeField] int addTimeCount;
+
+    //ポーズ使用後の次回使用可能までの待機時間
+    [SerializeField] int pauseStanbyTime;
+
     public bool isStarted = false;
 
     private void Start()
     {
         scorePoint = 0;
-        timeCount = 10;
         pointText.text = ("SCORE:" + scorePoint.ToString() + "m");
-        timeText.text = ("Time:" + timeCount.ToString() + "sec");
+        timeText.text = ("Time:" + startTime.ToString() + "sec");
         hiScore = PlayerPrefs.GetInt("HISCORE", 0);
         hiScoreText.text = ("HISCORE:"+hiScore.ToString() + "m");
         buttonColor = pauseButton.GetComponent<Image>().color;
@@ -50,40 +56,24 @@ public class UIManager : MonoBehaviour
         
 
     }
+    
     public void AddPoint(int point)
     {
         scorePoint += point;
         pointText.text = ("SCORE:" + scorePoint.ToString() + "m");
-        if(scorePoint >= 12 && scorePoint<33)
-        {
-            GameManager.instance.stageType = GameManager.STAGETYPE.STAGE2;
-        }else if(scorePoint >= 33 &&scorePoint<54)
-        {
-            GameManager.instance.stageType = GameManager.STAGETYPE.STAGE3;
-        }
-        else if (scorePoint >= 54 && scorePoint < 75)
-        {
-            GameManager.instance.stageType = GameManager.STAGETYPE.STAGE4;
-        }
-        else if (scorePoint >= 75 && scorePoint < 96)
-        {
-            GameManager.instance.stageType = GameManager.STAGETYPE.STAGE5;
-        }
-
-        stagePoint += point;
-
+        
     }
 
     void TimeStart()
     {
-        timeCount -= Time.deltaTime;
-        if (timeCount <= 0)
+        startTime -= Time.deltaTime;
+        if (startTime <= 0)
         {
-            timeCount = 0;
+            startTime = 0;
             GameManager.instance.isFinished = true;
             TimeUp();
         }
-        timeText.text = ("Time:" + timeCount.ToString("F1") + "sec");
+        timeText.text = ("Time:" + startTime.ToString("F1") + "sec");
         
     }
     void TimeUp()
@@ -114,7 +104,7 @@ public class UIManager : MonoBehaviour
     }
     public void AddTimeCount()
     {
-        timeCount += 5f;
+        startTime += addTimeCount;
         StartCoroutine(AddTimeCountAction());
     }
 
@@ -144,7 +134,7 @@ public class UIManager : MonoBehaviour
         pausePanel.SetActive(false);
         GameManager.instance.isPaused = !GameManager.instance.isPaused;
         Time.timeScale = GameManager.instance.isPaused ? 0 : 1;
-        Invoke("EnablePauseButton", 5f);
+        Invoke("EnablePauseButton", pauseStanbyTime);
         
     }
     void EnablePauseButton()
