@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] StageManager stageManager;
     [SerializeField] CreateManager createManager;
     [SerializeField] UIManager uiManager;
-    public bool isJgCreared = false;
+    
     //BG、パネル、オブジェクトをtrueの時動かす
     public bool isMoved = false;
     public bool isMoved2 = false;
@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
     public bool isTouched ;
 
     //全体のスクロールスピード
-    [SerializeField]float moveSpeed = 15f;
+    [SerializeField]float moveSpeed ;
     
 
     public float MoveSpeed { get => moveSpeed; }
@@ -42,14 +42,14 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        isPaused = false;
-        isTouched = true;
+        Init();
         
     }
 
   
     public void RestartScene()
     {
+        Init();
         Scene thisScene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(thisScene.name);
     }
@@ -81,7 +81,14 @@ public class GameManager : MonoBehaviour
         stageManager.backgroundType = StageManager.BACKGROUNDTYPE.BG_5;
     }
     
-
+    void Init()
+    {
+        isMoved = false;
+        isMoved2 = false;
+        isFinished = false;
+        isPaused = false;
+        isTouched = true;
+    }
     
 
     void GetCollection(int getNum)

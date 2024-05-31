@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2609864331432731202}
-  - component: {fileID: 3178241933088413661}
+  - component: {fileID: 2472801807739998618}
   m_Layer: 0
   m_Name: Stage_5
   m_TagString: Stage_5
@@ -42,7 +42,7 @@ Transform:
   - {fileID: 3186007866928646913}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3178241933088413661
+--- !u!114 &2472801807739998618
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -51,7 +51,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7983001386366960123}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f24fd971005fc414e98af39eddc7617b, type: 3}
+  m_Script: {fileID: 11500000, guid: 8d2c98ad7fd3940729d25ac9a6bc78a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &1177033503326470049

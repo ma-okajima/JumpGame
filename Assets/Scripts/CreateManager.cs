@@ -24,9 +24,7 @@ public class CreateManager : MonoBehaviour
     bool isItemed = false;
     List<GameObject> createPrefabs;
 
-    
 
-   
     //createNum:[0~2 Trap] [8~9 Item]
     public void Panelspawn()
     {

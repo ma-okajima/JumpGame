@@ -6,39 +6,22 @@ public class GroundManager : MonoBehaviour
 {
     //GameManagerにて一括管理
     float moveSpeed;
-    string myTagName;
+    
 
     private void Start()
     {
         moveSpeed = GameManager.instance.MoveSpeed;
-        myTagName = this.gameObject.tag;
         
+        //moveSpeed = 15f;
         
     }
     private void Update()
     {
         
-        if(myTagName == "Stage_5")
-        {
-            if (transform.position.x <= -600)
-            {
-                transform.position = new Vector2(300, 0);
-            }
-        }
-        else
-        {
-            if(transform.position.x <= -600)
-            {
-                Destroy(gameObject);
-            }
-        }
-
-
         //ジャンプ中実行される処理
         if (GameManager.instance.isMoved || GameManager.instance.isMoved2)
         {
             MoveAction();
-
         }
         
     }
