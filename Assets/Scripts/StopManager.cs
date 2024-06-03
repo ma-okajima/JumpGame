@@ -16,7 +16,6 @@ public class StopManager : MonoBehaviour
         {
             GameManager.instance.isMoved = false;
             StartCoroutine(OneJumpAction());
-
         }
         else if (GameManager.instance.isMoved2 == true)
         {
@@ -34,7 +33,6 @@ public class StopManager : MonoBehaviour
         createManager.Panelspawn();
         yield return new WaitUntil(() => GameManager.instance.isTouched = true);
     }
-    
     void NextJump()
     {
         StartCoroutine(OneJumpAction());

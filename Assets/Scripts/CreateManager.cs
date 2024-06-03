@@ -15,9 +15,10 @@ public class CreateManager : MonoBehaviour
     Vector2 spawnPointTrap2 = new Vector2(18,-0.5f);
 
     int createNum;
+   
     int itemCount = 0;
-    
-    
+   
+
     //アイテム出現後次出現まで空ける値
     [SerializeField] int itemWaitCount;
     public bool isTraped = false;
@@ -25,21 +26,23 @@ public class CreateManager : MonoBehaviour
     List<GameObject> createPrefabs;
 
 
+    private void Start()
+    {
+        createPrefabs = createPrefabs_1;
+    }
+
     //createNum:[0~2 Trap] [8~9 Item]
     public void Panelspawn()
     {
         CreateObject(spawnPointTrap2);
-     
     }
     public void Panelspawn2(UnityAction nextJump)
     {
-        CreateObject(spawnPointTrap,nextJump);
-      
+        CreateObject(spawnPointTrap, nextJump);
     }
- 
-   
 
-    void CreateObject(Vector2 spawnPoint,UnityAction nextJump=null)
+
+    public void CreateObject(Vector2 spawnPoint, UnityAction nextJump=null)
     {
 
         if (itemCount >= itemWaitCount)
@@ -78,8 +81,6 @@ public class CreateManager : MonoBehaviour
             {
                 isTraped = false;
             }
-
-
         }
         else if (isItemed == true && isTraped == false)
         {
@@ -93,29 +94,30 @@ public class CreateManager : MonoBehaviour
             {
                 isTraped = false;
             }
-
         }
         else if (isItemed == true && isTraped == true)
         {
-
             createNum = Random.Range(3, 8);
             isTraped = false;
             itemCount++;
-
-
         }
+
         if (createNum <= 2 || createNum >= 8)
         {
             GameObject newOb = Instantiate(createPrefabs[createNum], spawnPoint, transform.rotation);//createPrefabs[createNum].transform.rotation);
 
         }
+
         nextJump?.Invoke();
+       
     }
+
+
     public void OnDetectObject(Collider2D col)
     {
         
         string tagName = col.gameObject.tag;
-        Debug.Log(col.gameObject.tag);
+        //Debug.Log(col.gameObject.tag);
         if(tagName == "Stage_1")
         {
             createPrefabs = createPrefabs_1;

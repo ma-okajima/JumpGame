@@ -3763,7 +3763,7 @@ MonoBehaviour:
   hiscoreChara: {fileID: 113869367}
   pauseButton: {fileID: 1833730054}
   disableColor: {r: 0.49411765, g: 0.49411765, b: 0.49411765, a: 0.4627451}
-  startTime: 10
+  startTime: 100
   addTimeCount: 5
   pauseStanbyTime: 5
   isStarted: 0
@@ -3975,7 +3975,7 @@ MonoBehaviour:
   createPrefabs_3:
   - {fileID: 4581511400187950585, guid: 95e30f78a817b4df192dc1fcce73b700, type: 3}
   - {fileID: 4581511400187950585, guid: 95e30f78a817b4df192dc1fcce73b700, type: 3}
-  - {fileID: 4581511400187950585, guid: 95e30f78a817b4df192dc1fcce73b700, type: 3}
+  - {fileID: 83550389051884920, guid: ab39eb0023b584e30a91940c1affb59d, type: 3}
   - {fileID: 8006886756024618505, guid: 58841eca010af4ef38a71288275b511c, type: 3}
   - {fileID: 8006886756024618505, guid: 58841eca010af4ef38a71288275b511c, type: 3}
   - {fileID: 8006886756024618505, guid: 58841eca010af4ef38a71288275b511c, type: 3}
@@ -3986,7 +3986,7 @@ MonoBehaviour:
   createPrefabs_4:
   - {fileID: 4581511400187950585, guid: f142faed0468442a48117d3915304fcc, type: 3}
   - {fileID: 4581511400187950585, guid: f142faed0468442a48117d3915304fcc, type: 3}
-  - {fileID: 4581511400187950585, guid: f142faed0468442a48117d3915304fcc, type: 3}
+  - {fileID: 83550389051884920, guid: 9f7b7ac74fa2b4f67acdd86a58aacba1, type: 3}
   - {fileID: 8119878837764192044, guid: 50b57efc2bf26440c978feb4aff4bfb8, type: 3}
   - {fileID: 8119878837764192044, guid: 50b57efc2bf26440c978feb4aff4bfb8, type: 3}
   - {fileID: 8119878837764192044, guid: 50b57efc2bf26440c978feb4aff4bfb8, type: 3}
@@ -3997,7 +3997,7 @@ MonoBehaviour:
   createPrefabs_5:
   - {fileID: 4581511400187950585, guid: f6f4ebfbd78ee4db98b1fa65a7c58d92, type: 3}
   - {fileID: 4581511400187950585, guid: f6f4ebfbd78ee4db98b1fa65a7c58d92, type: 3}
-  - {fileID: 4581511400187950585, guid: f6f4ebfbd78ee4db98b1fa65a7c58d92, type: 3}
+  - {fileID: 83550389051884920, guid: d1c485232776b40d1b3d0c455e2a7f26, type: 3}
   - {fileID: 2163788190978392805, guid: d38b82f00567747588bf2d37642e4e2a, type: 3}
   - {fileID: 2163788190978392805, guid: d38b82f00567747588bf2d37642e4e2a, type: 3}
   - {fileID: 2163788190978392805, guid: d38b82f00567747588bf2d37642e4e2a, type: 3}

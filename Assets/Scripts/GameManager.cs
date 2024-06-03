@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     public bool isFinished = false;
     public bool isPaused = false;
     public bool isTouched ;
+   
 
     //全体のスクロールスピード
     [SerializeField]float moveSpeed ;
@@ -88,6 +89,7 @@ public class GameManager : MonoBehaviour
         isFinished = false;
         isPaused = false;
         isTouched = true;
+       
     }
     
 

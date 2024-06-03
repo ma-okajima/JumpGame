@@ -27,7 +27,7 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] float waitCount;
 
     [SerializeField] UIManager uiManager;
-
+    
     
     void Start()
     {
@@ -69,6 +69,8 @@ public class PlayerManager : MonoBehaviour
         uiManager.isStarted = true;
         if (GameManager.instance.isTouched && !GameManager.instance.isMoved &&!isStoped)
         {
+            
+
             GameManager.instance.isMoved = true;
             GameManager.instance.isTouched = false;
             animator.SetTrigger("Jump");
@@ -95,6 +97,8 @@ public class PlayerManager : MonoBehaviour
         
         if (GameManager.instance.isTouched&&!GameManager.instance.isMoved2&&!isStoped)
         {
+            
+
             GameManager.instance.isMoved2 = true;
             GameManager.instance.isTouched = false;
             animator.SetTrigger("Jump2");
@@ -106,6 +110,9 @@ public class PlayerManager : MonoBehaviour
         }
         
     }
+    
+
+
     void Jump()
     {
         rb.velocity = Vector2.up * jumpPower;
@@ -130,7 +137,7 @@ public class PlayerManager : MonoBehaviour
             uiManager.AddTimeCount();
             Destroy(col.gameObject);
         }
-        else if (col.CompareTag("Trap"))
+        else if (col.CompareTag("Trap")|| col.CompareTag("Trap2"))
         {
             isStoped = true;
             Destroy(col.gameObject.GetComponent<Collider2D>());
@@ -155,7 +162,5 @@ public class PlayerManager : MonoBehaviour
         {
             GameManager.instance.Stage5();
         }
-
     }
- 
 }

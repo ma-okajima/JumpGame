@@ -14,6 +14,7 @@ TagManager:
   - Stage_3
   - Stage_4
   - Stage_5
+  - Trap2
   layers:
   - Default
   - TransparentFX
