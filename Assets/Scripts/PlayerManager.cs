@@ -116,6 +116,7 @@ public class PlayerManager : MonoBehaviour
     void Jump()
     {
         rb.velocity = Vector2.up * jumpPower;
+        GameManager.instance.OnJumpSE();
     }
 
     //Trap接触時の待機時間
@@ -134,17 +135,22 @@ public class PlayerManager : MonoBehaviour
         
         if (col.CompareTag("Item1"))
         {
+            GameManager.instance.OnItemSE();
             uiManager.AddTimeCount();
             Destroy(col.gameObject);
+            GameManager.instance.GetFirstItem();
         }
         else if (col.CompareTag("Trap")|| col.CompareTag("Trap2"))
         {
+            string tagName = col.gameObject.tag;
             isStoped = true;
             Destroy(col.gameObject.GetComponent<Collider2D>());
             animator.SetTrigger("Hurt");
-            jumpPower = hurtJumpPower;
-            Jump();
+            GameManager.instance.OnHurtSE();
+            //jumpPower = hurtJumpPower;
+            //Jump();
             StartCoroutine(WaitTimeAction());
+            GameManager.instance.CollisionTrap(tagName);
         }
         else if (col.CompareTag("Stage_2"))
         {

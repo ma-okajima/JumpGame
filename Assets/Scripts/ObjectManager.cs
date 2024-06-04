@@ -4,36 +4,38 @@ using UnityEngine;
 
 public class ObjectManager : MonoBehaviour
 {
+    int count = 0;
+    float moveSpeed;
 
-    private void OnTriggerEnter2D(Collider2D col)
+    private void Start()
     {
-        
-            string tagName = col.gameObject.tag;
-        Debug.Log(tagName);
-            //各ステージのJumpPanelに対応したアイテム、障害物以外が生成された場合は削除
-            //現状ステージの切り替え時、非対応オブジェクトが生成される可能性がある為
-            if (tagName + "Trap(Clone)" == this.gameObject.name || tagName + "Trap2(Clone)" == this.gameObject.name||tagName + "Item(Clone)" == this.gameObject.name)
-            {
-                transform.position = new Vector2(col.gameObject.transform.position.x, transform.position.y);
-                transform.SetParent(col.transform);    
-            }
-            else
-            if (tagName == "Player")
-            {
-                return;
-            }
-            else
-            {
-                Destroy(gameObject);
-            }
+        moveSpeed = GameManager.instance.MoveSpeed;
+    }
+    public void Tap()
+    {
+        count++;
+        if (count >= 3)
+        {
+            GameManager.instance.GetCollection(20);
+            Destroy(gameObject);
+        }
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
-        //画面外に出たら削除
-        if (transform.position.x <= -12)
+        if (GameManager.instance.isMoved || GameManager.instance.isMoved2)
         {
-            Destroy(this.gameObject);
+            MoveAction();
+
         }
-    }    
+    }
+
+
+    void MoveAction()
+    {
+        transform.Translate(Vector2.left * moveSpeed * Time.deltaTime);
+
+    }
+
+
 }

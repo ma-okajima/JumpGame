@@ -13,8 +13,11 @@ MonoBehaviour:
   m_Name: Collection_4
   m_EditorClassIdentifier: 
   name: 4
+  nameSprite: {fileID: 0}
   keyword: OpenKey NoCollision
-  condition: 0
-  sprite: {fileID: 21300000, guid: a730a75e325287748a0babfcac0941ac, type: 3}
-  text: toritoritori
+  keywordSprite: {fileID: 0}
+  condition: 1
+  itemSprite: {fileID: 0}
+  coverSprite: {fileID: 0}
+  textSprite: {fileID: 0}
   num: 4

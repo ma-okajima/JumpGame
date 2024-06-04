@@ -24,6 +24,7 @@ public class UIManager : MonoBehaviour
 
     int scorePoint;
     int hiScore;
+    int playCount;
     //ゲーム開始時の所持時間
     [SerializeField]float startTime;
 
@@ -34,6 +35,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] int pauseStanbyTime;
 
     public bool isStarted = false;
+    //ハイスコアの時リザルトのBGM変える
+    public bool isHighScored = false;
 
     private void Start()
     {
@@ -44,16 +47,42 @@ public class UIManager : MonoBehaviour
         hiScoreText.text = ("HISCORE:"+hiScore.ToString() + "m");
         buttonColor = pauseButton.GetComponent<Image>().color;
         Time.timeScale = 1;
+        //遊んだ回数が規定を超えたらコレクションゲット。
+        playCount = PlayerPrefs.GetInt("PLAYCOUNT", 0);
+        if(playCount > 1)
+        {
+            GameManager.instance.GetCollection(19);
+        }
 
     }
 
     private void Update()
     {
+        if (GameManager.instance.isFinished)
+        {
+            return;
+        }
         if (isStarted)
         {
             TimeStart();
         }
-        
+
+        if(scorePoint > 100 &&scorePoint<=220)
+        {
+            GameManager.instance.stageTYPE = GameManager.STAGETYPE.STAGE_2;
+        }
+        else if(scorePoint >220 && scorePoint <= 360)
+        {
+            GameManager.instance.stageTYPE = GameManager.STAGETYPE.STAGE_3;
+        }
+        else if (scorePoint > 360 && scorePoint <= 520)
+        {
+            GameManager.instance.stageTYPE = GameManager.STAGETYPE.STAGE_4;
+        }
+        else if (scorePoint > 520 )
+        {
+            GameManager.instance.stageTYPE = GameManager.STAGETYPE.STAGE_5;
+        }
 
     }
     
@@ -61,6 +90,12 @@ public class UIManager : MonoBehaviour
     {
         scorePoint += point;
         pointText.text = ("SCORE:" + scorePoint.ToString() + "m");
+
+        //1000m達成でコレクションゲット
+        if(scorePoint >= 1000)
+        {
+           // GameManager.instance.GetCollection(25);
+        }
         
     }
 
@@ -78,6 +113,7 @@ public class UIManager : MonoBehaviour
     }
     void TimeUp()
     {
+        GameManager.instance.OnTimeUpSE();
         if (scorePoint > hiScore)
         {
             hiScore = scorePoint;
@@ -85,10 +121,16 @@ public class UIManager : MonoBehaviour
             hiScoreText.text = ("HISCORE:"+hiScore.ToString() + "m");
             PlayerPrefs.Save();
             hiscoreChara.SetActive(true);
+            isHighScored = true;
             
         }
         timeupPanel.SetActive(true);
         StartCoroutine(Result());
+
+        //遊んだ回数を記録
+        playCount++;
+        PlayerPrefs.SetInt("PLAYCOUNT", playCount);
+        PlayerPrefs.Save();
     }
     IEnumerator　Result()
     {
@@ -96,12 +138,13 @@ public class UIManager : MonoBehaviour
        
         yield return new WaitForSeconds(2);
         resultPanel.SetActive(true);
+        if (isHighScored)
+        {
+            StartCoroutine(GameManager.instance.OnHighScoreSE());
+        }
+        
     }
-
-    public void RestartButton()
-    {
-        GameManager.instance.RestartScene();
-    }
+   
     public void AddTimeCount()
     {
         startTime += addTimeCount;
@@ -122,6 +165,7 @@ public class UIManager : MonoBehaviour
         {
             return;
         }
+        GameManager.instance.OnSystemSE();
         pausePanel.SetActive(true);
         pauseButton.interactable = false;
         pauseButton.GetComponent<Image>().color = disableColor;
@@ -131,6 +175,7 @@ public class UIManager : MonoBehaviour
     }
     public void PauseBackButton()
     {
+        GameManager.instance.OnSystemSE();
         pausePanel.SetActive(false);
         GameManager.instance.isPaused = !GameManager.instance.isPaused;
         Time.timeScale = GameManager.instance.isPaused ? 0 : 1;

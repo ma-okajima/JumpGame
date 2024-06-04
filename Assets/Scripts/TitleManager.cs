@@ -9,23 +9,33 @@ public class TitleManager : MonoBehaviour
     
     [SerializeField] GameObject optionPanel;
 
-    
-   
+    [SerializeField] AudioClip systemSE;
+    [SerializeField] AudioClip startSE;
 
+    AudioSource audioSource;
+
+    private void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
     public void OnStartButton()
     {
-        SceneManager.LoadScene("MainScene");
+        audioSource.PlayOneShot(startSE);
+        StartCoroutine(OnStart());
     }
     public void OnCollectionButton()
     {
-        SceneManager.LoadScene("CollectionScene");
+        audioSource.PlayOneShot(systemSE);
+        StartCoroutine(OnCollection());
     }
     public void OnOptionButton()
     {
+        audioSource.PlayOneShot(systemSE);
         optionPanel.SetActive(true);
     }
     public void OptionBackButton()
     {
+        audioSource.PlayOneShot(systemSE);
         optionPanel.SetActive(false);
     }
 
@@ -34,5 +44,15 @@ public class TitleManager : MonoBehaviour
         //PlayerPrefs.DeleteKey("HISCORE");
         PlayerPrefs.DeleteAll();
     }
-    
+
+    IEnumerator OnStart()
+    {
+        yield return new WaitForSeconds(0.5f);
+        SceneManager.LoadScene("MainScene");
+    }
+    IEnumerator OnCollection()
+    {
+        yield return new WaitForSeconds(0.5f);
+        SceneManager.LoadScene("CollectionScene");
+    }
 }

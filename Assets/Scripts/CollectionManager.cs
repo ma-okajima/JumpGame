@@ -13,19 +13,26 @@ public class CollectionManager : MonoBehaviour
     [SerializeField] Image defaultImage;
     [SerializeField] Image coverImage;
     [SerializeField] Image coverNameImage;
+
+    [SerializeField] AudioClip systemSE;
+
+    AudioSource audioSource;
+
     private void Start()
     {
         coverNameImage = collectionNameImage;
         coverImage = defaultImage;
+        audioSource = GetComponent<AudioSource>();
     }
 
     public void TitleButton()
     {
-        SceneManager.LoadScene("TitleScene");
+        StartCoroutine(OnTitle());
     }
 
     public void ShowTargetCollection(CollectionSO collectionSO)
     {
+        OnSystemSE();
         if (collectionSO.Condition == true)
         {
             defaultImage.sprite = collectionSO.Sprite;
@@ -39,5 +46,15 @@ public class CollectionManager : MonoBehaviour
         }
 
         
+    }
+    public void OnSystemSE()
+    {
+        audioSource.PlayOneShot(systemSE);
+    }
+    IEnumerator OnTitle()
+    {
+        OnSystemSE();
+        yield return new WaitForSeconds(0.5f);
+        SceneManager.LoadScene("TitleScene");
     }
 }

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f39ccff72d8184423991050cd163efd4, type: 3}
   m_Name: Collection_17
   m_EditorClassIdentifier: 
-  name: 12
+  name: 17
   nameSprite: {fileID: 0}
   keyword: OpenKey NoCollision
   keywordSprite: {fileID: 0}

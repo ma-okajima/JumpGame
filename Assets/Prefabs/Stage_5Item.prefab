@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 8286916137120997956}
   - component: {fileID: 457588962435289907}
   - component: {fileID: 6678994481747302728}
-  - component: {fileID: 7976155386595289150}
   - component: {fileID: 7988739183251936537}
+  - component: {fileID: 2997427271251271653}
   m_Layer: 0
   m_Name: Stage_5Item
   m_TagString: Item1
@@ -154,18 +154,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.6693019, y: 0.6116946}
   m_EdgeRadius: 0
---- !u!114 &7976155386595289150
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7150852459492525218}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0997766635ce40c499f193ff6c95c5d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!50 &7988739183251936537
 Rigidbody2D:
   serializedVersion: 4
@@ -193,3 +181,15 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &2997427271251271653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7150852459492525218}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85d2b01e8e45947458ddf03eeab49525, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

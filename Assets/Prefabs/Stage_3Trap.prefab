@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 6891795240430934740}
   - component: {fileID: 6589602790902262649}
   - component: {fileID: 4711690964308238517}
-  - component: {fileID: 2880730801317258179}
   - component: {fileID: 3793098537991971272}
+  - component: {fileID: 4947819886603685248}
   m_Layer: 0
   m_Name: Stage_3Trap
   m_TagString: Trap
@@ -132,18 +132,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.7368262, y: 0.27849537}
   m_EdgeRadius: 0
---- !u!114 &2880730801317258179
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4581511400187950585}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0997766635ce40c499f193ff6c95c5d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!50 &3793098537991971272
 Rigidbody2D:
   serializedVersion: 4
@@ -171,3 +159,15 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &4947819886603685248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4581511400187950585}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abd35ce42032e40ddb1868dfd3f1d92e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
