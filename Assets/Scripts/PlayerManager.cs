@@ -168,5 +168,10 @@ public class PlayerManager : MonoBehaviour
         {
             GameManager.instance.Stage5();
         }
+        //else if (col.CompareTag("BGM_1"))
+        //{
+        //    GameManager.instance.BGM_1();
+        //}
+
     }
 }

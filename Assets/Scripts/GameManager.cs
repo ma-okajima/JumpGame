@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] StageManager stageManager;
     [SerializeField] CreateManager createManager;
     [SerializeField] UIManager uiManager;
+    [SerializeField] BGMController bgmController;
 
     [SerializeField] AudioClip jumpSE;
     [SerializeField] AudioClip hurtSE;
@@ -19,6 +20,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] AudioClip timeupSE;
     [SerializeField] AudioClip highscoreSE;
     [SerializeField] AudioClip collectionSE;
+    
+    
 
     AudioSource audioSource;
 
@@ -329,5 +332,10 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(5f);
         audioSource.Play();
     }
+
+    //public void BGM_1()
+    //{
+    //    bgmController.BGM_1();
+    //}
 }
 
