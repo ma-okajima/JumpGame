@@ -1430,11 +1430,11 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: cf647e3af27064f37aca411d65ab24b1, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -2914,8 +2914,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e94dd86f596943058e5c3098566a78e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bgm2: {fileID: 8300000, guid: cf647e3af27064f37aca411d65ab24b1, type: 3}
-  bgm3: {fileID: 8300000, guid: ee5267f5d4cda47df9b7faffe16aba00, type: 3}
   audioSource1: {fileID: 320894018}
   audioSource2: {fileID: 1089584731}
   fadeDuration: 2
@@ -2933,7 +2931,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -3458,11 +3456,11 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: ee5267f5d4cda47df9b7faffe16aba00, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
