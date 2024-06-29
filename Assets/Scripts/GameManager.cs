@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] CreateManager createManager;
     [SerializeField] UIManager uiManager;
     [SerializeField] BGMController bgmController;
+    
 
     [SerializeField] AudioClip jumpSE;
     [SerializeField] AudioClip hurtSE;
@@ -102,6 +103,16 @@ public class GameManager : MonoBehaviour
         Array.Clear(itemCounts, 0, itemCounts.Length);
         Array.Clear(trapCounts, 0, trapCounts.Length);
         Array.Clear(trap2Counts, 0, trap2Counts.Length);
+    }
+    //リワード広告をみらたその状態からリスタート
+    public void RewardRestart()
+    {
+        isMoved = false;
+        isMoved2 = false;
+        isFinished = false;
+        isPaused = false;
+        isTouched = true;
+        uiManager.RewardRestart();
     }
 
     private void Update()
@@ -195,13 +206,13 @@ public class GameManager : MonoBehaviour
         }
         else if(stageTYPE ==STAGETYPE.STAGE_5&& trapCounts[stageNum] ==0 && trap2Counts[stageNum] == 0)
         {
-            GetCollection(15);
+            GetCollection(25);
         }
         //同じ障害物に3回あたる
-        if (trapCounts[stageNum] >= 3||trap2Counts[stageNum] >= 3)
-        {
-            GetCollection(16);
-        }
+        //if (trapCounts[stageNum] >= 3||trap2Counts[stageNum] >= 3)
+        //{
+        //    GetCollection(16);
+        //}
 
     }
 

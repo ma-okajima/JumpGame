@@ -16,15 +16,20 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject timeupPanel;
     [SerializeField] GameObject resultPanel;
     [SerializeField] GameObject pausePanel;
-    [SerializeField] GameObject hiscoreChara;
+    [SerializeField] List<GameObject> danceAnimations;
     [SerializeField] Button pauseButton;
     [SerializeField] Color disableColor;
+    [SerializeField] GameObject starOb;
+    [SerializeField] GameObject canvas;
+    [SerializeField] GameObject highScoreTextImage;
     Color buttonColor;
 
-
+    [SerializeField]Transform spawnPoint;
     int scorePoint;
     int hiScore;
     int playCount;
+    int danceNum;
+    int clearDanceCount = 0;
     //ゲーム開始時の所持時間
     [SerializeField]float startTime;
 
@@ -47,11 +52,12 @@ public class UIManager : MonoBehaviour
         hiScoreText.text = ("HISCORE:"+hiScore.ToString() + "m");
         buttonColor = pauseButton.GetComponent<Image>().color;
         Time.timeScale = 1;
+        danceNum = Random.Range(0, 4);
         //遊んだ回数が規定を超えたらコレクションゲット。
         playCount = PlayerPrefs.GetInt("PLAYCOUNT", 0);
-        if(playCount > 1)
+        if(playCount >= 82)
         {
-            GameManager.instance.GetCollection(19);
+            GameManager.instance.GetCollection(24);
         }
 
     }
@@ -90,11 +96,27 @@ public class UIManager : MonoBehaviour
     {
         scorePoint += point;
         pointText.text = ("SCORE:" + scorePoint.ToString() + "m");
+        //テスト
+        int starNum = Random.Range(0, 2);
+        //int starNum = Random.Range(0, 100);
 
         //1000m達成でコレクションゲット
-        if(scorePoint >= 1000)
+        if (scorePoint >= 821)
         {
-           // GameManager.instance.GetCollection(25);
+           GameManager.instance.GetCollection(20);
+        }
+        //1000m以降ランダムで星出現
+        //if (scorePoint > 1000 && starNum == 1)
+        //{
+        //    GameObject star = Instantiate(starOb,spawnPoint);
+        //    star.transform.SetParent(canvas.transform, false); Instantiate(starOb, transform.position, transform.rotation);
+        //}
+
+        //テスト
+        if (scorePoint > 0 && starNum == 1)
+        {
+            GameObject star = Instantiate(starOb,spawnPoint);
+            star.transform.SetParent(canvas.transform, false);
         }
         
     }
@@ -120,24 +142,40 @@ public class UIManager : MonoBehaviour
             PlayerPrefs.SetInt("HISCORE", hiScore);
             hiScoreText.text = ("HISCORE:"+hiScore.ToString() + "m");
             PlayerPrefs.Save();
-            hiscoreChara.SetActive(true);
+            highScoreTextImage.SetActive(true);
             isHighScored = true;
             
         }
+        //遊んだ回数を記録
+        playCount++;
+        PlayerPrefs.SetInt(danceAnimations[danceNum].ToString(), 1);
+        PlayerPrefs.SetInt("PLAYCOUNT", playCount);
+        PlayerPrefs.Save();
         timeupPanel.SetActive(true);
         StartCoroutine(Result());
 
-        //遊んだ回数を記録
-        playCount++;
-        PlayerPrefs.SetInt("PLAYCOUNT", playCount);
-        PlayerPrefs.Save();
+        
     }
     IEnumerator　Result()
     {
         resultScore.text = (scorePoint.ToString() + "m");
+        danceAnimations[danceNum].SetActive(true);
        
+        for (int i = 0; i < danceAnimations.Count; i++)
+        {
+            int clearNum = PlayerPrefs.GetInt(danceAnimations[i].ToString(), 0);
+            if(clearNum == 0)
+            {
+                clearDanceCount++;
+            }
+        }
+        
         yield return new WaitForSeconds(2);
         resultPanel.SetActive(true);
+        if (clearDanceCount == 0)
+        {
+            GameManager.instance.GetCollection(22);
+        }
         if (isHighScored)
         {
             StartCoroutine(GameManager.instance.OnHighScoreSE());
@@ -199,5 +237,17 @@ public class UIManager : MonoBehaviour
         getcollectionBox.SetActive(true);
         yield return new WaitForSeconds(2f);
         getcollectionBox.SetActive(false);
+    }
+    public void RewardRestart()
+    {
+        isStarted = false;
+        startTime += 10;
+        resultPanel.SetActive(false);
+        timeupPanel.SetActive(false);
+        highScoreTextImage.SetActive(false);
+        isHighScored = false;
+        danceAnimations[danceNum].SetActive(false);
+        timeText.text = ("Time:" + startTime.ToString() + "sec");
+
     }
 }

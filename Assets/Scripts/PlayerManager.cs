@@ -22,7 +22,7 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] float maxYPos;
     //Trap接触時の待機時間管理の為のbool値
     bool isStoped =false;
-
+    int oneJumpCount = 0;
     //Trap接触時の待機時間
     [SerializeField] float waitCount;
 
@@ -79,7 +79,12 @@ public class PlayerManager : MonoBehaviour
             rb.gravityScale = oneJumpGravity;
             Jump();
             uiManager.AddPoint(1);
-
+            oneJumpCount++;
+            //7回連続ワンジャンプでコレクション
+            if (oneJumpCount >= 7)
+            {
+                GameManager.instance.GetCollection(21);
+            }
         }
        
         
@@ -107,6 +112,7 @@ public class PlayerManager : MonoBehaviour
             rb.gravityScale = twoJumpGravity;
             Jump();
             uiManager.AddPoint(2);
+            oneJumpCount = 0;
         }
         
     }

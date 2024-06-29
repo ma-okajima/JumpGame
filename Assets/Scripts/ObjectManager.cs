@@ -6,17 +6,19 @@ public class ObjectManager : MonoBehaviour
 {
     int count = 0;
     float moveSpeed;
-
+    int obNum;
     private void Start()
     {
         moveSpeed = GameManager.instance.MoveSpeed;
+        obNum = int.Parse(gameObject.name);
+        
     }
     public void Tap()
     {
         count++;
         if (count >= 3)
         {
-            GameManager.instance.GetCollection(20);
+            GameManager.instance.GetCollection(obNum);
             Destroy(gameObject);
         }
     }
@@ -27,6 +29,10 @@ public class ObjectManager : MonoBehaviour
         {
             MoveAction();
 
+        }
+        if (transform.position.x < -12)
+        {
+            Destroy(gameObject);
         }
     }
 

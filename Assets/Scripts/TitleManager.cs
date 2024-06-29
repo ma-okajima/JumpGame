@@ -8,7 +8,7 @@ public class TitleManager : MonoBehaviour
 {
     
     [SerializeField] GameObject optionPanel;
-
+    [SerializeField] AdMobBanner adMobBanner;
     [SerializeField] AudioClip systemSE;
     [SerializeField] AudioClip startSE;
 
@@ -17,6 +17,7 @@ public class TitleManager : MonoBehaviour
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
+        adMobBanner.BannerStart();
     }
     public void OnStartButton()
     {
@@ -48,11 +49,13 @@ public class TitleManager : MonoBehaviour
     IEnumerator OnStart()
     {
         yield return new WaitForSeconds(0.5f);
+        adMobBanner.BannerDestroy();
         SceneManager.LoadScene("MainScene");
     }
     IEnumerator OnCollection()
     {
         yield return new WaitForSeconds(0.5f);
+        adMobBanner.BannerDestroy();
         SceneManager.LoadScene("CollectionScene");
     }
 }

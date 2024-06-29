@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: 4
   nameSprite: {fileID: 0}
-  keyword: OpenKey NoCollision
+  keyword: "Stage5\u306B\u5230\u9054"
   keywordSprite: {fileID: 0}
   condition: 1
   itemSprite: {fileID: 0}
