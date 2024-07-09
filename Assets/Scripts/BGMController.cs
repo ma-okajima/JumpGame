@@ -15,6 +15,7 @@ public class BGMController : MonoBehaviour
 
     private bool isFading = false;
     private float originalVolume;
+    private float secondVolume = 0.5f;
     private GameManager.STAGETYPE previousStageType;
     // Start is called before the first frame update
     void Start()
@@ -59,7 +60,7 @@ public class BGMController : MonoBehaviour
             float progress = timer / fadeDuration;
 
             fromSource.volume = Mathf.Lerp(originalVolume, 0f, progress);
-            toSource.volume = Mathf.Lerp(0f, originalVolume, progress);
+            toSource.volume = Mathf.Lerp(0f, secondVolume, progress);
 
             yield return null;
         }
