@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] CreateManager createManager;
     [SerializeField] UIManager uiManager;
     [SerializeField] BGMController bgmController;
-    
+    [SerializeField] AdMobReward adMobReward;
 
     [SerializeField] AudioClip jumpSE;
     [SerializeField] AudioClip hurtSE;
@@ -32,7 +32,9 @@ public class GameManager : MonoBehaviour
     public bool isFinished = false;
     public bool isPaused = false;
     public bool isTouched ;
-   
+    public bool isBGMMuted =false;
+    public bool isSoundMuted = false;
+
 
     //全体のスクロールスピード
     [SerializeField]float moveSpeed ;
@@ -87,6 +89,23 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         Init();
+        string bgm = PlayerPrefs.GetString("BGM", "OFF");
+        string sound = PlayerPrefs.GetString("SOUND", "OFF");
+        if(bgm == "OFF")
+        {
+            isBGMMuted = false;
+        }else if(bgm == "ON")
+        {
+            isBGMMuted = true;
+        }
+
+        if(sound == "OFF")
+        {
+            isSoundMuted = false;
+        }else if(sound == "ON")
+        {
+            isSoundMuted = true;
+        }
         audioSource = GetComponent<AudioSource>();
         //テスト用　消す
         i = 1;
@@ -121,26 +140,41 @@ public class GameManager : MonoBehaviour
         switch (stageTYPE)
         {
             case STAGETYPE.STAGE_1:
-                stageNum = 1;
+                stageNum = 0;
                 trapCollectionNum = 10;
                 break;
             case STAGETYPE.STAGE_2:
-                stageNum = 2;
+                stageNum = 1;
                 trapCollectionNum = 11;
                 break;
             case STAGETYPE.STAGE_3:
-                stageNum = 3;
+                stageNum = 2;
                 trapCollectionNum = 12;
                 break;
             case STAGETYPE.STAGE_4:
-                stageNum = 4;
+                stageNum = 3;
                 trapCollectionNum = 13;
                 break;
             case STAGETYPE.STAGE_5:
-                stageNum = 5;
+                stageNum = 4;
                 trapCollectionNum = 14;
                 break;
         }
+
+        if (isBGMMuted)
+        {
+            bgmController.BGMMuted();
+        }
+   
+        //if (isSoundMuted)
+        //{
+
+        //}
+        //else
+        //{
+
+        //}
+
         //テスト用　消す
         if (Input.GetKeyDown(KeyCode.O))
         {
@@ -149,6 +183,8 @@ public class GameManager : MonoBehaviour
             i ++;
             Debug.Log(collectionCount);
         }
+        Debug.Log(stageNum);
+        Debug.Log(itemCounts[stageNum]);
     }
 
     //初めてアイテムを取得したらコレクション
@@ -344,9 +380,16 @@ public class GameManager : MonoBehaviour
         audioSource.Play();
     }
 
-    //public void BGM_1()
-    //{
-    //    bgmController.BGM_1();
-    //}
+    public void AdMobReward()
+    {
+        adMobReward.ShowAdMobReward();
+    }
+
+    public void BGM_1()
+    {
+        audioSource.volume = 0;
+    }
+
 }
+
 

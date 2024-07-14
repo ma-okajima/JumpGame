@@ -30,20 +30,28 @@ public class BGMController : MonoBehaviour
 
     private void Update()
     {
-        // ステージの状態が変更されたかどうかをチェック
-        if (GameManager.instance.stageTYPE != previousStageType)
+        if (GameManager.instance.isBGMMuted)
         {
-            previousStageType = GameManager.instance.stageTYPE;
+            return;
+        }
+        else
+        {
+            // ステージの状態が変更されたかどうかをチェック
+            if (GameManager.instance.stageTYPE != previousStageType)
+            {
+                previousStageType = GameManager.instance.stageTYPE;
 
-            if (GameManager.instance.stageTYPE == GameManager.STAGETYPE.STAGE_2 && !isFading)
-            {
-                StartCoroutine(CrossFade(audioSource, audioSource1));
-            }
-            else if (GameManager.instance.stageTYPE == GameManager.STAGETYPE.STAGE_3 && !isFading)
-            {
-                StartCoroutine(CrossFade(audioSource1, audioSource2));
+                if (GameManager.instance.stageTYPE == GameManager.STAGETYPE.STAGE_3 && !isFading)
+                {
+                    StartCoroutine(CrossFade(audioSource, audioSource1));
+                }
+                else if (GameManager.instance.stageTYPE == GameManager.STAGETYPE.STAGE_5 && !isFading)
+                {
+                    StartCoroutine(CrossFade(audioSource1, audioSource2));
+                }
             }
         }
+        
         
 
     }
@@ -66,10 +74,18 @@ public class BGMController : MonoBehaviour
         }
 
         fromSource.Stop();
+        originalVolume = secondVolume;
         fromSource.volume = originalVolume;
         
         isFading = false;
         
+    }
+
+    public void BGMMuted()
+    {
+        audioSource.volume = 0;
+        audioSource1.volume = 0;
+        audioSource2.volume = 0;
     }
     
 }

@@ -54,20 +54,20 @@ public class StageManager : MonoBehaviour
     }
     public void Stage3()
     {
-        bgPrefabs[0].SetActive(true);
+        bgPrefabs[2].SetActive(true);
         bgPrefabs[1].SetActive(false);
 
     }
     public void Stage4()
     {
-        bgPrefabs[0].SetActive(false);
-        bgPrefabs[1].SetActive(true);
+        bgPrefabs[2].SetActive(false);
+        bgPrefabs[3].SetActive(true);
 
     }
     public void Stage5()
     {
-        bgPrefabs[0].SetActive(true);
-        bgPrefabs[1].SetActive(false);
+        bgPrefabs[4].SetActive(true);
+        bgPrefabs[3].SetActive(false);
 
     }
 }

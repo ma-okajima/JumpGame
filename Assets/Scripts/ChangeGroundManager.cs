@@ -18,7 +18,7 @@ public class ChangeGroundManager : MonoBehaviour
         {
             if (transform.position.x <= -600)
             {
-                transform.position = new Vector2(300, 0);
+                transform.position = new Vector2(300, -0.3f);
             }
         }
         else

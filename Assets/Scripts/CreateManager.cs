@@ -11,8 +11,8 @@ public class CreateManager : MonoBehaviour
     [SerializeField] List<GameObject> createPrefabs_4 = new List<GameObject> { };
     [SerializeField] List<GameObject> createPrefabs_5 = new List<GameObject> { };
     
-    Vector2 spawnPointTrap = new Vector2(15, -0.5f); 
-    Vector2 spawnPointTrap2 = new Vector2(18,-0.5f);
+    Vector2 spawnPointTrap = new Vector2(15, -0.77f); 
+    Vector2 spawnPointTrap2 = new Vector2(18,-0.77f);
 
     int createNum;
    

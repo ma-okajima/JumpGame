@@ -22,6 +22,26 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject starOb;
     [SerializeField] GameObject canvas;
     [SerializeField] GameObject highScoreTextImage;
+    [SerializeField] Image oneJumpButtonImage;
+    [SerializeField] Image twoJumpButtonImage;
+    [SerializeField] Image pauseButtonImage;
+
+    [SerializeField] Image pauseRetryImage;
+    [SerializeField] Sprite defaultPauseRetrySprite;
+    [SerializeField] Sprite pauseRetrySprite;
+    [SerializeField] Image pauseBackImage;
+    [SerializeField] Sprite defaultPauseBackSprite;
+    [SerializeField] Sprite pauseBackSprite;
+    [SerializeField] Image resultRetryImage;
+    [SerializeField] Sprite defaultResultRetrySprite;
+    [SerializeField] Sprite ResultRetrySprite;
+    [SerializeField] Image resultRewardImage;
+    [SerializeField] Sprite defaultResultRewardSprite;
+    [SerializeField] Sprite ResultRewardSprite;
+
+    [SerializeField] List<Sprite> oneJumpSprites;
+    [SerializeField] List<Sprite> twoJumpSprites;
+    [SerializeField] List<Sprite> pauseSprites;
     Color buttonColor;
 
     [SerializeField]Transform spawnPoint;
@@ -30,6 +50,7 @@ public class UIManager : MonoBehaviour
     int playCount;
     int danceNum;
     int clearDanceCount = 0;
+    int spriteNum = 0;
     //ゲーム開始時の所持時間
     [SerializeField]float startTime;
 
@@ -46,6 +67,7 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         scorePoint = 0;
+        spriteNum = 0;
         pointText.text = ("SCORE:" + scorePoint.ToString() + "m");
         timeText.text = ("Time:" + startTime.ToString() + "sec");
         hiScore = PlayerPrefs.GetInt("HISCORE", 0);
@@ -76,25 +98,39 @@ public class UIManager : MonoBehaviour
         if(scorePoint > 100 &&scorePoint<=220)
         {
             GameManager.instance.stageTYPE = GameManager.STAGETYPE.STAGE_2;
+            spriteNum = 1;
         }
         else if(scorePoint >220 && scorePoint <= 360)
         {
             GameManager.instance.stageTYPE = GameManager.STAGETYPE.STAGE_3;
+            spriteNum = 2;
         }
         else if (scorePoint > 360 && scorePoint <= 520)
         {
             GameManager.instance.stageTYPE = GameManager.STAGETYPE.STAGE_4;
+            spriteNum = 3;
         }
         else if (scorePoint > 520 )
         {
             GameManager.instance.stageTYPE = GameManager.STAGETYPE.STAGE_5;
+            spriteNum = 4;
         }
+
+            oneJumpButtonImage.sprite = oneJumpSprites[spriteNum];
+            twoJumpButtonImage.sprite = twoJumpSprites[spriteNum];
+            pauseButtonImage.sprite = pauseSprites[spriteNum];
+        
 
     }
     
     public void AddPoint(int point)
     {
         scorePoint += point;
+        if(scorePoint >= 9999)
+        {
+            scorePoint = 9999;
+        }
+
         pointText.text = ("SCORE:" + scorePoint.ToString() + "m");
         //テスト
         int starNum = Random.Range(0, 2);
@@ -186,6 +222,10 @@ public class UIManager : MonoBehaviour
     public void AddTimeCount()
     {
         startTime += addTimeCount;
+        if (startTime >= 99)
+        {
+            startTime = 99;
+        }
         StartCoroutine(AddTimeCountAction());
     }
 
@@ -214,11 +254,7 @@ public class UIManager : MonoBehaviour
     public void PauseBackButton()
     {
         GameManager.instance.OnSystemSE();
-        pausePanel.SetActive(false);
-        GameManager.instance.isPaused = !GameManager.instance.isPaused;
-        Time.timeScale = GameManager.instance.isPaused ? 0 : 1;
-        Invoke("EnablePauseButton", pauseStanbyTime);
-        
+        StartCoroutine(PauseBack());
     }
     void EnablePauseButton()
     {
@@ -249,5 +285,54 @@ public class UIManager : MonoBehaviour
         danceAnimations[danceNum].SetActive(false);
         timeText.text = ("Time:" + startTime.ToString() + "sec");
 
+    }
+
+    public void RestartScene()
+    {
+        StartCoroutine(PauseRetry());
+    }
+    public void ResultRestartButton()
+    {
+        StartCoroutine(ResultRestart());
+    }
+    public void ResultRewardButton()
+    {
+        StartCoroutine(ResultReward());
+    }
+    IEnumerator PauseBack()
+    {
+        pauseBackImage.sprite = pauseBackSprite;
+        GameManager.instance.isPaused = !GameManager.instance.isPaused;
+        Time.timeScale = GameManager.instance.isPaused ? 0 : 1;
+        Invoke("EnablePauseButton", pauseStanbyTime);
+        yield return new WaitForSeconds(0.1f);
+        pauseBackImage.sprite = defaultPauseBackSprite;
+        pausePanel.SetActive(false);
+        
+    }
+    IEnumerator PauseRetry()
+    {
+        pauseRetryImage.sprite = pauseRetrySprite;
+        GameManager.instance.isPaused = !GameManager.instance.isPaused;
+        Time.timeScale = GameManager.instance.isPaused ? 0 : 1;
+        yield return new WaitForSeconds(0.1f);
+        pauseRetryImage.sprite = defaultPauseRetrySprite;
+        GameManager.instance.RestartScene();
+
+    }
+    IEnumerator ResultRestart()
+    {
+        resultRetryImage.sprite = ResultRetrySprite;
+        yield return new WaitForSeconds(0.1f);
+        resultRetryImage.sprite = defaultResultRetrySprite;
+        GameManager.instance.RestartScene();
+
+    }
+    IEnumerator ResultReward()
+    {
+        resultRewardImage.sprite = ResultRewardSprite;
+        yield return new WaitForSeconds(0.1f);
+        resultRewardImage.sprite = defaultResultRewardSprite;
+        GameManager.instance.AdMobReward();
     }
 }

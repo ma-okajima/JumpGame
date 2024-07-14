@@ -14,7 +14,7 @@ public class BackGroundManager : MonoBehaviour
     private void FixedUpdate()
     {
         
-        if (transform.position.x<=-19.2f)
+        if (transform.position.x<=-46f)
         {
            
             transform.position = new Vector2(0, 0);
