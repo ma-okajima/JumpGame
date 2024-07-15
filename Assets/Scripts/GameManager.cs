@@ -21,8 +21,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] AudioClip timeupSE;
     [SerializeField] AudioClip highscoreSE;
     [SerializeField] AudioClip collectionSE;
-    
-    
+
+    public static string latestCmView;
 
     AudioSource audioSource;
 
@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
     public bool isTouched ;
     public bool isBGMMuted =false;
     public bool isSoundMuted = false;
-
+    public bool isRewarded = false;
 
     //全体のスクロールスピード
     [SerializeField]float moveSpeed ;
@@ -91,6 +91,9 @@ public class GameManager : MonoBehaviour
         Init();
         string bgm = PlayerPrefs.GetString("BGM", "OFF");
         string sound = PlayerPrefs.GetString("SOUND", "OFF");
+        latestCmView = PlayerPrefs.GetString("DATETIME");
+        RewardCheck();
+
         if(bgm == "OFF")
         {
             isBGMMuted = false;
@@ -122,6 +125,24 @@ public class GameManager : MonoBehaviour
         Array.Clear(itemCounts, 0, itemCounts.Length);
         Array.Clear(trapCounts, 0, trapCounts.Length);
         Array.Clear(trap2Counts, 0, trap2Counts.Length);
+    }
+
+     void RewardCheck()
+    {
+        string today = DateTimeString(DateTime.Now);
+
+        if (today == latestCmView)
+        {
+            isRewarded = true;
+        }
+        else
+        {
+            isRewarded = false;
+        }
+    }
+    public static string DateTimeString(DateTime date)
+    {
+        return date.Year.ToString() + "/" + date.Month.ToString() + "/" + date.Day.ToString();
     }
     //リワード広告をみらたその状態からリスタート
     public void RewardRestart()
@@ -382,6 +403,10 @@ public class GameManager : MonoBehaviour
 
     public void AdMobReward()
     {
+        latestCmView = DateTimeString(DateTime.Now);
+        PlayerPrefs.SetString("DATETIME", latestCmView);
+        PlayerPrefs.Save();
+        isRewarded = true;
         adMobReward.ShowAdMobReward();
     }
 

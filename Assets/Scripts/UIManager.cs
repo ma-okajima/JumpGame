@@ -38,6 +38,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] Image resultRewardImage;
     [SerializeField] Sprite defaultResultRewardSprite;
     [SerializeField] Sprite ResultRewardSprite;
+    [SerializeField] GameObject RewardButton;
 
     [SerializeField] List<Sprite> oneJumpSprites;
     [SerializeField] List<Sprite> twoJumpSprites;
@@ -119,6 +120,15 @@ public class UIManager : MonoBehaviour
             oneJumpButtonImage.sprite = oneJumpSprites[spriteNum];
             twoJumpButtonImage.sprite = twoJumpSprites[spriteNum];
             pauseButtonImage.sprite = pauseSprites[spriteNum];
+
+        if (GameManager.instance.isRewarded)
+        {
+            RewardButton.SetActive(false);
+        }
+        else if (!GameManager.instance.isRewarded)
+        {
+            RewardButton.SetActive(true);
+        }
         
 
     }
