@@ -6,14 +6,13 @@ using UnityEngine;
 public class CollectionSO : ScriptableObject
 {
     [SerializeField] new string name;
-    [SerializeField] Sprite nameSprite;
+    [SerializeField] Sprite targetClearSprite;
     [SerializeField] string keyword;
     [SerializeField] Sprite keywordSprite;
     [SerializeField] bool condition;
     [SerializeField] Sprite itemSprite;
     [SerializeField] Sprite coverSprite;
     
-    [SerializeField] Sprite textSprite;
 
     [SerializeField] int num;
 
@@ -24,8 +23,9 @@ public class CollectionSO : ScriptableObject
     
     public int Num { get => num;  }
     public Sprite Coversprite { get => coverSprite;}
-    public Sprite NameSprite { get => nameSprite;}
+    
     public Sprite KeywordSprite { get => keywordSprite;}
-    public Sprite TextSprite { get => textSprite;}
+    
+    public Sprite TargetClearSprite { get => targetClearSprite; }
 }
 

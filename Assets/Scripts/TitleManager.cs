@@ -8,7 +8,7 @@ public class TitleManager : MonoBehaviour
 {
     
     [SerializeField] GameObject optionPanel;
-    [SerializeField] AdMobBanner adMobBanner;
+    
    
     [SerializeField] Image startButtonImage;
     [SerializeField] Image optionButtonImage;
@@ -36,7 +36,7 @@ public class TitleManager : MonoBehaviour
             BGMMuted = true;
         }
         audioSource = GetComponent<AudioSource>();
-        adMobBanner.BannerStart();
+        
     }
 
     private void Update()
@@ -85,7 +85,7 @@ public class TitleManager : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         startButtonImage.sprite = buttonSprites[0];
         yield return new WaitForSeconds(0.5f);
-        adMobBanner.BannerDestroy();
+        
         SceneManager.LoadScene("MainScene");
     }
     IEnumerator OnOption()
@@ -102,7 +102,7 @@ public class TitleManager : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         collectionButtonImage.sprite = buttonSprites[4];
         yield return new WaitForSeconds(0.5f);
-        adMobBanner.BannerDestroy();
+        
         SceneManager.LoadScene("CollectionScene");
     }
 

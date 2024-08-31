@@ -13,11 +13,10 @@ MonoBehaviour:
   m_Name: Collection_1
   m_EditorClassIdentifier: 
   name: 1stTrophy
-  nameSprite: {fileID: 0}
+  targetClearSprite: {fileID: 21300000, guid: 188369b6e021a439fafc20a26abd2353, type: 3}
   keyword: "Stage2\u3078\u5230\u9054"
-  keywordSprite: {fileID: 0}
-  condition: 1
-  itemSprite: {fileID: 0}
-  coverSprite: {fileID: 0}
-  textSprite: {fileID: 0}
+  keywordSprite: {fileID: 21300000, guid: 291e195899b0b4cf5ad063d7a02524eb, type: 3}
+  condition: 0
+  itemSprite: {fileID: 21300000, guid: 2481550763b824bbf96436d5c180c717, type: 3}
+  coverSprite: {fileID: 21300000, guid: d16461182b2564a9783f39baaef111fb, type: 3}
   num: 1

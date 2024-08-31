@@ -9,13 +9,16 @@ public class CollectionManager : MonoBehaviour
 {
     
     [SerializeField] Image collectionNameImage;
-    [SerializeField] Image descriptionImage;
-    [SerializeField] Image defaultImage;
+    [SerializeField] Image targetKeywordImage;
+    [SerializeField] Image targetdefaultImage;
     [SerializeField] Image coverImage;
     [SerializeField] Image coverNameImage;
     [SerializeField] Image backImage;
     [SerializeField] Sprite backSprite;
     [SerializeField] Sprite defaultBackSprite;
+    [SerializeField] GameObject targetPanel;
+    [SerializeField] GameObject targetClearImageBox;
+    [SerializeField] GameObject targetkeywordImageBox;
 
     [SerializeField] CollectionSEController collectionSEController;
 
@@ -34,7 +37,7 @@ public class CollectionManager : MonoBehaviour
             BGMMuted = true;
         }
         coverNameImage = collectionNameImage;
-        coverImage = defaultImage;
+        coverImage = targetdefaultImage;
         audioSource = GetComponent<AudioSource>();
     }
 
@@ -59,16 +62,19 @@ public class CollectionManager : MonoBehaviour
     public void ShowTargetCollection(CollectionSO collectionSO)
     {
         OnSystemSE();
+        targetPanel.SetActive(true);
         if (collectionSO.Condition == true)
         {
-            defaultImage.sprite = collectionSO.Sprite;
-            collectionNameImage.sprite= collectionSO.NameSprite;
-            descriptionImage.sprite= collectionSO.TextSprite;
+            targetdefaultImage.sprite = collectionSO.TargetClearSprite;
+            targetClearImageBox.SetActive(true);
+            targetkeywordImageBox.SetActive(false);
+            
         }else if (collectionSO.Condition == false)
         {
-            defaultImage= coverImage;
-            collectionNameImage= coverNameImage;
-            descriptionImage.sprite= collectionSO.KeywordSprite;
+            
+            targetKeywordImage.sprite= collectionSO.KeywordSprite;
+            targetClearImageBox.SetActive(false);
+            targetkeywordImageBox.SetActive(true);
         }
 
         
@@ -85,5 +91,10 @@ public class CollectionManager : MonoBehaviour
         backImage.sprite = defaultBackSprite;
         yield return new WaitForSeconds(0.5f);
         SceneManager.LoadScene("TitleScene");
+    }
+
+    public void BackTargetPanel()
+    {
+        targetPanel.SetActive(false);
     }
 }

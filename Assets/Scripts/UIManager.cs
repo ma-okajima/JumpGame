@@ -21,7 +21,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] Color disableColor;
     [SerializeField] GameObject starOb;
     [SerializeField] GameObject canvas;
-    [SerializeField] GameObject highScoreTextImage;
+    
     [SerializeField] Image oneJumpButtonImage;
     [SerializeField] Image twoJumpButtonImage;
     [SerializeField] Image pauseButtonImage;
@@ -39,6 +39,10 @@ public class UIManager : MonoBehaviour
     [SerializeField] Sprite defaultResultRewardSprite;
     [SerializeField] Sprite ResultRewardSprite;
     [SerializeField] GameObject RewardButton;
+    [SerializeField] Image resultHomeImage;
+    [SerializeField] Sprite defaultHomeSprite;
+    [SerializeField] Sprite ResultHomeSprite;
+    [SerializeField] GameObject playerImage;
 
     [SerializeField] List<Sprite> oneJumpSprites;
     [SerializeField] List<Sprite> twoJumpSprites;
@@ -69,10 +73,10 @@ public class UIManager : MonoBehaviour
     {
         scorePoint = 0;
         spriteNum = 0;
-        pointText.text = ("SCORE:" + scorePoint.ToString() + "m");
-        timeText.text = ("Time:" + startTime.ToString() + "sec");
+        pointText.text = (scorePoint.ToString() + "m");
+        timeText.text = (startTime.ToString() + "s");
         hiScore = PlayerPrefs.GetInt("HISCORE", 0);
-        hiScoreText.text = ("HISCORE:"+hiScore.ToString() + "m");
+        hiScoreText.text = (hiScore.ToString() + "m");
         buttonColor = pauseButton.GetComponent<Image>().color;
         Time.timeScale = 1;
         danceNum = Random.Range(0, 4);
@@ -141,7 +145,7 @@ public class UIManager : MonoBehaviour
             scorePoint = 9999;
         }
 
-        pointText.text = ("SCORE:" + scorePoint.ToString() + "m");
+        pointText.text = (scorePoint.ToString() + "m");
         //テスト
         int starNum = Random.Range(0, 2);
         //int starNum = Random.Range(0, 100);
@@ -176,7 +180,7 @@ public class UIManager : MonoBehaviour
             GameManager.instance.isFinished = true;
             TimeUp();
         }
-        timeText.text = ("Time:" + startTime.ToString("F1") + "sec");
+        timeText.text = (startTime.ToString("F1") + "s");
         
     }
     void TimeUp()
@@ -186,9 +190,9 @@ public class UIManager : MonoBehaviour
         {
             hiScore = scorePoint;
             PlayerPrefs.SetInt("HISCORE", hiScore);
-            hiScoreText.text = ("HISCORE:"+hiScore.ToString() + "m");
+            hiScoreText.text = (hiScore.ToString() + "m");
             PlayerPrefs.Save();
-            highScoreTextImage.SetActive(true);
+            
             isHighScored = true;
             
         }
@@ -217,6 +221,7 @@ public class UIManager : MonoBehaviour
         }
         
         yield return new WaitForSeconds(2);
+        playerImage.SetActive(false);
         resultPanel.SetActive(true);
         if (clearDanceCount == 0)
         {
@@ -290,10 +295,11 @@ public class UIManager : MonoBehaviour
         startTime += 10;
         resultPanel.SetActive(false);
         timeupPanel.SetActive(false);
-        highScoreTextImage.SetActive(false);
+        
         isHighScored = false;
         danceAnimations[danceNum].SetActive(false);
-        timeText.text = ("Time:" + startTime.ToString() + "sec");
+        playerImage.SetActive(true);
+        timeText.text = (startTime.ToString() + "s");
 
     }
 
@@ -309,6 +315,12 @@ public class UIManager : MonoBehaviour
     {
         StartCoroutine(ResultReward());
     }
+    public void ResultHomeButton()
+    {
+        StartCoroutine(ResultHome());
+    }
+
+
     IEnumerator PauseBack()
     {
         pauseBackImage.sprite = pauseBackSprite;
@@ -344,5 +356,12 @@ public class UIManager : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         resultRewardImage.sprite = defaultResultRewardSprite;
         GameManager.instance.AdMobReward();
+    }
+    IEnumerator ResultHome()
+    {
+        resultHomeImage.sprite = ResultHomeSprite;
+        yield return new WaitForSeconds(0.1f);
+        resultHomeImage.sprite = defaultHomeSprite;
+        GameManager.instance.TitleScene();
     }
 }
