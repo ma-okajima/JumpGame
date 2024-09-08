@@ -146,7 +146,7 @@ public class PlayerManager : MonoBehaviour
             Destroy(col.gameObject);
             GameManager.instance.GetFirstItem();
         }
-        else if (col.CompareTag("Trap")|| col.CompareTag("Trap2"))
+        else if (col.CompareTag("Trap")|| col.CompareTag("Trap2")|| col.CompareTag("Trap3"))
         {
             string tagName = col.gameObject.tag;
             isStoped = true;

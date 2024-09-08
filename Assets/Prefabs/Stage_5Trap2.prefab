@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1618554488871030215}
   - component: {fileID: -4163345040074504061}
   - component: {fileID: 2861283057427553620}
+  - component: {fileID: -4860586155945419423}
   m_Layer: 0
   m_Name: Stage_5Trap2
   m_TagString: Trap2
@@ -76,8 +77,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: f842a2b2f2d69854880419b90645f628, type: 3}
-  m_Color: {r: 0.9716981, g: 0.23375754, b: 0.23375754, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 64ecce9d0a93a42678929912c92d1bbb, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -119,18 +120,18 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.011191249, y: -0.36823067}
+  m_Offset: {x: -0.03915751, y: -0.02}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.65, y: 1.425}
+    pivot: {x: 0.5, y: 0.24}
+    oldSize: {x: 1.5542858, y: 3.52}
     newSize: {x: 0.53, y: 0.53}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.7368262, y: 0.27849537}
+  m_Size: {x: 0.9761436, y: 0.2784953}
   m_EdgeRadius: 0
 --- !u!50 &-4163345040074504061
 Rigidbody2D:
@@ -171,3 +172,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a3f2c07f35224a31b27bd30d832805c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  newSprite: {fileID: 0}
+--- !u!95 &-4860586155945419423
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 83550389051884920}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e5294551bfb404015a3caca7f02bc73b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

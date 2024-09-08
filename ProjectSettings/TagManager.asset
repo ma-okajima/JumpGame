@@ -16,6 +16,7 @@ TagManager:
   - Stage_5
   - Trap2
   - BGM_1
+  - Trap3
   layers:
   - Default
   - TransparentFX

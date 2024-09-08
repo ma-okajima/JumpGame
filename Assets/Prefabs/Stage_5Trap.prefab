@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 6589602790902262649}
   - component: {fileID: 4711690964308238517}
   - component: {fileID: 3793098537991971272}
-  - component: {fileID: 2392829314163899634}
+  - component: {fileID: 535258423697601031}
+  - component: {fileID: 3793920104257802365}
   m_Layer: 0
   m_Name: Stage_5Trap
   m_TagString: Trap
@@ -76,8 +77,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 4b8df3e837c15134e966ef69ce5e536d, type: 3}
-  m_Color: {r: 1, g: 0.39526987, b: 0, a: 1}
+  m_Sprite: {fileID: 21300000, guid: d688c67551aca445c854e29aeb3f2e29, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -119,18 +120,18 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.011191249, y: -0.36823067}
+  m_Offset: {x: 0.030746222, y: -0.49}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.325, y: 1.325}
+    pivot: {x: 0.5, y: 0.3}
+    oldSize: {x: 1.5542858, y: 3.52}
     newSize: {x: 0.53, y: 0.53}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.7368262, y: 0.27849537}
+  m_Size: {x: 0.92897654, y: 0.2784953}
   m_EdgeRadius: 0
 --- !u!50 &3793098537991971272
 Rigidbody2D:
@@ -159,7 +160,28 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &2392829314163899634
+--- !u!95 &535258423697601031
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4581511400187950585}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7e492407fde6f437fb139a2406ddd89a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &3793920104257802365
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -168,6 +190,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 4581511400187950585}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: abd35ce42032e40ddb1868dfd3f1d92e, type: 3}
+  m_Script: {fileID: 11500000, guid: 87b38652115fd447c8f733e135569e2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

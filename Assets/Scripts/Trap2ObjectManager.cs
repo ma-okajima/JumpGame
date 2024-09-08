@@ -4,6 +4,14 @@ using UnityEngine;
 
 public class Trap2ObjectManager : MonoBehaviour
 {
+    [SerializeField] Sprite newSprite;
+    SpriteRenderer spriteRenderer;
+
+
+    private void Start()
+    {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+    }
 
     private void OnTriggerEnter2D(Collider2D col)
     {
@@ -20,6 +28,11 @@ public class Trap2ObjectManager : MonoBehaviour
         else
         if (tagName == "Player")
         {
+            if(newSprite != null)
+            {
+                spriteRenderer.sprite = newSprite;
+            }
+            
             return;
         }
         else

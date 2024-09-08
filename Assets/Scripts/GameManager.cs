@@ -35,6 +35,7 @@ public class GameManager : MonoBehaviour
     public bool isBGMMuted =false;
     public bool isSoundMuted = false;
     public bool isRewarded = false;
+    bool isTrapped;
 
     //全体のスクロールスピード
     [SerializeField]float moveSpeed ;
@@ -46,6 +47,11 @@ public class GameManager : MonoBehaviour
 
     // 各ステージでTrap2に当たった回数を保管
     int[] trap2Counts = new int[5];
+
+    // 各ステージでTrap3に当たった回数を保管
+    int[] trap3Counts = new int[] { 1,1,1,1,0};
+
+    int[] defaultTrap3;
 
     //CheckTrapCount()の達成時に獲得できるコレクションNo.10〜14
     int trapCollectionNum;
@@ -76,6 +82,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        
         if(instance == null)
         {
             instance = this;
@@ -116,15 +123,18 @@ public class GameManager : MonoBehaviour
 
     void Init()
     {
+        defaultTrap3 = (int[])trap3Counts.Clone();
         isMoved = false;
         isMoved2 = false;
         isFinished = false;
         isPaused = false;
         isTouched = true;
+        isTrapped = false;
         stageTYPE = STAGETYPE.STAGE_1;
         Array.Clear(itemCounts, 0, itemCounts.Length);
         Array.Clear(trapCounts, 0, trapCounts.Length);
         Array.Clear(trap2Counts, 0, trap2Counts.Length);
+     
     }
 
      void RewardCheck()
@@ -243,28 +253,42 @@ public class GameManager : MonoBehaviour
         {
             AddTrap2Count();
         }
-        CheckTrapCount();
+        else if (tagName == "Trap3")
+        {
+            AddTrap3Count();
+        }
+
+            CheckTrapCount();
     }
 
     public void AddTrapCount()
     {
         trapCounts[stageNum] += 1;
+        isTrapped = true;
     }
     public void AddTrap2Count()
     {
         trap2Counts[stageNum] += 1;
+        isTrapped = true;
+    }
+    public void AddTrap3Count()
+    {
+        trap3Counts[stageNum] += 1;
+        isTrapped = true;
     }
     //各ステージ規定回数障害物にあたったらコレクション獲得
     void CheckTrapCount()
     {
-        if (trapCounts[stageNum] >= 1 && trap2Counts[stageNum] >= 1)
+        
+        if (trapCounts[stageNum] >= 1 && trap2Counts[stageNum] >= 1 && trap3Counts[stageNum] >= 1)
         {
             GetCollection(trapCollectionNum);
         }
-        else if(stageTYPE ==STAGETYPE.STAGE_5&& trapCounts[stageNum] ==0 && trap2Counts[stageNum] == 0)
+        else if(stageTYPE ==STAGETYPE.STAGE_5 && isTrapped == false)
         {
             GetCollection(25);
         }
+        
         //同じ障害物に3回あたる
         //if (trapCounts[stageNum] >= 3||trap2Counts[stageNum] >= 3)
         //{
@@ -275,10 +299,12 @@ public class GameManager : MonoBehaviour
 
     public void RestartScene()
     {
+        DefaultTrap3();
         StartCoroutine(OnRestart());
     }
     public void TitleScene()
     {
+        DefaultTrap3();
         StartCoroutine(OnTitle());
     }
     public void CollectionScene()
@@ -305,6 +331,7 @@ public class GameManager : MonoBehaviour
     {
         stageManager.backgroundType = StageManager.BACKGROUNDTYPE.BG_5;
         GetCollection(4);
+        CheckTrapCount();
     }
     
    
@@ -413,6 +440,11 @@ public class GameManager : MonoBehaviour
     public void BGM_1()
     {
         audioSource.volume = 0;
+    }
+
+    void DefaultTrap3()
+    {
+        trap3Counts = (int[])defaultTrap3.Clone();
     }
 
 }
